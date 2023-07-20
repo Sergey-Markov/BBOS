@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { BackHandler, Pressable, View, Share } from 'react-native';
 import { Button, Text } from 'react-native-paper';
@@ -10,6 +10,7 @@ import { QRCode } from 'react-native-custom-qr-codes-expo';
 import ModalWrapper from '../ModalWrapper/ModalWrapper';
 
 import s from './WebViewWithCtrls.styles';
+import { SHARE_BTN_LABEL } from '../../../constants';
 
 interface IWebViewWithCtrlsProps {
   url: string;
@@ -29,7 +30,7 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
   const navigation = useNavigation();
   const theme = useAppTheme();
 
-  const handleBackButton = () => {
+  const handleBackButton = useCallback(() => {
     if (canGoBack) {
       if (webviewRef.current) {
         webviewRef.current.goBack();
@@ -38,18 +39,19 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
       }
     }
     return true;
-  };
+  }, [canGoBack]);
 
-  const handleForwardButton = () => {
+  const handleForwardButton = useCallback(() => {
     if (canGoForward && webviewRef.current) {
       webviewRef.current.goForward();
     }
-  };
+  }, [canGoForward]);
+
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
 
-  const shareContent = async () => {
+  const shareContent = useCallback(async () => {
     try {
       Share.share({
         url: currentUrl,
@@ -58,7 +60,7 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
     } catch (error) {
       console.log('Error:', error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButton);
@@ -67,11 +69,15 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
     };
   }, [canGoBack]);
 
-  const btnTextColorsForward = canGoForward ? 'white' : undefined;
-  const btnTextColorsBack = canGoBack ? 'white' : undefined;
-  const backgroundColorBtnBack = !canGoBack ? '#ccc' : theme.colors.secondary;
+  const btnTextColorsForward = canGoForward
+    ? theme.colors.whiteText
+    : undefined;
+  const btnTextColorsBack = canGoBack ? theme.colors.whiteText : undefined;
+  const backgroundColorBtnBack = !canGoBack
+    ? theme.elevation.level5
+    : theme.colors.secondary;
   const backgroundColorBtnForward = !canGoForward
-    ? '#ccc'
+    ? theme.elevation.level5
     : theme.colors.secondary;
 
   return (
@@ -139,7 +145,7 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
         renderError={NotFound}
       />
       <ModalWrapper isVisible={modalOpen} onClose={toggleModal}>
-        <View style={{ alignItems: 'center', gap: 10 }}>
+        <View style={s(theme).qrCodeWrapper}>
           <QRCode
             content={currentUrl}
             logo={require('../../../../assets/favicon.png')}
@@ -148,25 +154,12 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
             color={theme.colors.primary}
             ecl="M"
           />
-          <Text
-            style={{
-              width: 250,
-              textAlign: 'center',
-              marginBottom: 10,
-            }}
-            selectable
-          >
+          <Text style={s(theme).qrCodeLink} selectable>
             {currentUrl}
           </Text>
           <Pressable onPress={shareContent}>
-            <Text
-              variant="titleLarge"
-              style={{
-                color: theme.colors.secondary,
-                fontWeight: '600',
-              }}
-            >
-              share
+            <Text variant="titleLarge" style={s(theme).shareBtnLabel}>
+              {SHARE_BTN_LABEL}
             </Text>
           </Pressable>
         </View>

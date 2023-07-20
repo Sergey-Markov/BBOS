@@ -35,6 +35,16 @@ const styles = (theme: any) =>
       height: '100%',
       backgroundColor: 'transparent',
     },
+    qrCodeWrapper: { alignItems: 'center', gap: 10 },
+    qrCodeLink: {
+      width: 250,
+      textAlign: 'center',
+      marginBottom: 10,
+    },
+    shareBtnLabel: {
+      color: theme.colors.secondary,
+      fontWeight: '600',
+    },
   });
 
 export default styles;
