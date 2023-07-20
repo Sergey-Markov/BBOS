@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "name": "ХОЧУ ПІЦУ",
+      "url": "https://www.instagram.com/hochu_pizza_/",
+      "tel": [
+        "0505500057"
+      ],
+      "address": "м.Черкаси,вул. Гагаріна, 142, 18000"
+    },
+    {
+      "name": "FOREST",
+      "url": "https://forest.choiceqr.com/menu/section:menyu/salati",
+      "tel": [
+        "0680493721",
+        "0631435785"
+      ],
+      "address": "м.Черкаси,вул. Пальохи, 25, 18000"
+    },
+    {
+      "name": "Stumari",
+      "url": "https://stumarirest.taplink.ws/",
+      "tel": [
+        "0672431680",
+        "0472590100"
+      ],
+      "address": "м.Черкаси,бул. Шевченко, 187, 18000"
+    },
+    {
+      "name": "РУШНИЧОК",
+      "url": "https://www.instagram.com/rushnuchok/",
+      "tel": [
+        "0687848844"
+      ],
+      "address": "м.Черкаси,вул. Гагаріна, 110, 18000"
+    },
+    {
+      "name": "Шашлична 'М'ясо'",
+      "url": "https://shashlichnamyaso.choiceqr.com/",
+      "tel": [
+        "0673189597"
+      ],
+      "address": "м.Черкаси,вул. Гагаріна, 142, 18000"
+    },
+    {
+      "name": "Pitbull",
+      "url": "https://pitbullcitycafe.choiceqr.com/",
+      "tel": [
+        "0635047261"
+      ],
+      "address": "м.Черкаси,вул. Небесної Сотні, 5, 18000"
+    }
+  ]
+}

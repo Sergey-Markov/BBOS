@@ -1,0 +1,62 @@
+{
+  "telephone_directory_data": [
+    {
+      "photo": null,
+      "name": "John Doe",
+      "official_position": "Голова ОСББ",
+      "tel": [
+        "0981111111",
+        "0987654324"
+      ]
+    },
+    {
+      "photo": "https://www.w3schools.com/howto/img_avatar.png",
+      "name": "Barbara Week",
+      "official_position": "Заступник голови ОСББ",
+      "tel": [
+        "0981111111",
+        "0987654320"
+      ]
+    },
+    {
+      "photo": "https://www.w3schools.com/howto/img_avatar.png",
+      "name": "Jane Doe",
+      "official_position": "бухгалтер",
+      "tel": [
+        "0987654320"
+      ]
+    },
+    {
+      "photo": null,
+      "name": "Kate Doe",
+      "official_position": "прибиральник",
+      "tel": [
+        "0987654321"
+      ]
+    },
+    {
+      "photo": "https://www.w3schools.com/howto/img_avatar.png",
+      "name": "John Doe",
+      "official_position": "охоронець",
+      "tel": [
+        "0987654322"
+      ]
+    },
+    {
+      "photo": "https://www.w3schools.com/howto/img_avatar.png",
+      "name": "Alan Doe",
+      "official_position": "охоронець",
+      "tel": [
+        "0987654323"
+      ]
+    },
+    {
+      "photo": null,
+      "name": "Peter Doe",
+      "official_position": "охоронець",
+      "tel": [
+        "0987654324"
+      ]
+    }
+  ]
+}

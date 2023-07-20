@@ -1,0 +1,46 @@
+{
+  "taxi_list_data": [
+    {
+      "name": "CabLook Taxi",
+      "url": "https://cablook.taxi",
+      "tel": [
+        "0932225665"
+      ]
+    },
+    {
+      "name": "Таксі Smile",
+      "url": "https://www.instagram.com/taxismile_che/",
+      "tel": [
+        "0931700777"
+      ]
+    },
+    {
+      "name": "Таксі Студент",
+      "url": "https://studenttaxi.com.ua/",
+      "tel": [
+        "0674708484"
+      ]
+    },
+    {
+      "name": "Грузове таксі",
+      "url": "https://studenttaxi.com.ua/",
+      "tel": [
+        "0674708484"
+      ]
+    },
+    {
+      "name": "Авалон",
+      "url": "https://studenttaxi.com.ua/",
+      "tel": [
+        "0930021312"
+      ]
+    },
+    {
+      "name": "Інклюзивний перевізник",
+      "url": "https://zabota-lyubimykh.com.ua/",
+      "tel": [
+        "0987962411"
+      ]
+    }
+  ]
+}
