@@ -43,24 +43,13 @@ const styles = (theme: any) =>
       left: -20,
       alignSelf: 'flex-start',
     },
-    buttonContent: {
-      backgroundColor: theme.colors.primary,
-      borderRadius: theme.roundness,
-    },
     btnsGroupe: {
       gap: 5,
-    },
-    secondaryBtn: {
-      backgroundColor: theme.colors.secondary,
-      borderRadius: theme.roundness,
     },
     forgotPassword: {
       alignSelf: 'flex-end',
       color: theme.colors.primary,
       textDecorationLine: 'underline',
-    },
-    registrationLinkBox: {
-      alignSelf: 'center',
     },
   });
 

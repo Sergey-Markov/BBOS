@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, View, SafeAreaView } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { IconButton, Text, TextInput } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -20,6 +20,7 @@ import {
   INPUT_TITLE_LABEL,
   SUBMIT_BTN_LABEL,
 } from '../../../constants';
+import LabelBtn from '../LabelBtn/LabelBtn';
 
 registerTranslation('ru', {
   save: 'Зберегти',
@@ -186,7 +187,11 @@ const EventForm = () => {
                 />
               </View>
 
-              <Button onPress={handleSubmit} title={SUBMIT_BTN_LABEL} />
+              <LabelBtn
+                mode="contained"
+                label={SUBMIT_BTN_LABEL}
+                onPress={handleSubmit}
+              />
 
               <DatePickerModal
                 locale="ru"

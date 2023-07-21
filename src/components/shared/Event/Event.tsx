@@ -1,7 +1,7 @@
 import React, { RefAttributes, useCallback } from 'react';
 import moment from 'moment';
 import { View, Share, TextInput } from 'react-native';
-import { Avatar, Text, Button, Card, TextInputProps } from 'react-native-paper';
+import { Avatar, Text, Card, TextInputProps } from 'react-native-paper';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import { TAbout, TEventData } from '../../../interfaces';
 import {
@@ -11,6 +11,18 @@ import {
 } from '../../../constants';
 
 import s from './Event.styles';
+import LabelBtn from '../LabelBtn/LabelBtn';
+
+const actionBtns = [
+  {
+    id: '1',
+    label: SHARE_BTN_LABEL,
+  },
+  {
+    id: '2',
+    label: COMMENT_BTN_LABEL,
+  },
+];
 
 interface IEventProps {
   data: TEventData;
@@ -77,16 +89,18 @@ const Event = ({ data, isShort = false, inputRef }: IEventProps) => {
         )}
       </Card.Content>
       {!isShort && (
-        <Card.Actions>
-          <Button labelStyle={s(theme).btnShareLabel} onPress={shareContent}>
-            {SHARE_BTN_LABEL}
-          </Button>
-          <Button
-            labelStyle={s(theme).btnCommentLabel}
-            onPress={focusInputHandler}
-          >
-            {COMMENT_BTN_LABEL}
-          </Button>
+        <Card.Actions style={s(theme).actionBtnsWrapper}>
+          {actionBtns.map((item) => {
+            const { id, label } = item;
+            const isShared = label === SHARE_BTN_LABEL;
+            return (
+              <LabelBtn
+                key={id}
+                label={label}
+                onPress={isShared ? shareContent : focusInputHandler}
+              />
+            );
+          })}
         </Card.Actions>
       )}
     </Card>

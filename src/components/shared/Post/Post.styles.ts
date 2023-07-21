@@ -24,13 +24,8 @@ const styles = (theme: any) =>
       alignItems: 'center',
       gap: 5,
     },
-    btnShareLabel: {
-      color: theme.colors.primary,
-      ...theme.fonts.labelMedium,
-    },
-    btnLabel: {
-      color: theme.colors.background,
-      ...theme.fonts.labelMedium,
+    actionWrapper: {
+      gap: 5,
     },
   });
 

@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import moment from 'moment';
 import { View, Share, TextInput } from 'react-native';
-import { Avatar, Text, Button, Card, TextInputProps } from 'react-native-paper';
+import { Avatar, Text, Card, TextInputProps } from 'react-native-paper';
 import {
   COMMENT_BTN_LABEL,
   SHARE_BTN_LABEL,
@@ -18,6 +18,7 @@ import {
 } from '../../../interfaces';
 
 import s from './Post.styles';
+import LabelBtn from '../LabelBtn/LabelBtn';
 
 const BTNS = [
   {
@@ -101,19 +102,15 @@ const Post = ({ data, isShort = true, inputRef }: IPostProps) => {
         </View>
       </Card.Content>
 
-      <Card.Actions>
+      <Card.Actions style={s(theme).actionWrapper}>
         {BTNS.map(({ id, label }) => {
-          const isShareBtn = label === 'Share';
+          const isShareBtn = label === SHARE_BTN_LABEL;
           return (
-            <Button
+            <LabelBtn
               key={id}
-              labelStyle={
-                isShareBtn ? s(theme).btnShareLabel : s(theme).btnLabel
-              }
+              label={label}
               onPress={isShareBtn ? shareContent : commentBtnHandler}
-            >
-              {label}
-            </Button>
+            />
           );
         })}
       </Card.Actions>

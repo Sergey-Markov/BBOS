@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Button, SafeAreaView, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { TextInput } from 'react-native-paper';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
@@ -12,6 +12,7 @@ import {
   INPUT_TITLE_LABEL,
   SUBMIT_BTN_LABEL,
 } from '../../../constants';
+import LabelBtn from '../LabelBtn/LabelBtn';
 
 const initialValues = {
   title: '',
@@ -88,7 +89,13 @@ const PostForm = () => {
                 textBreakStrategy="balanced"
                 multiline
               />
-              <Button onPress={handleSubmit} title={SUBMIT_BTN_LABEL} />
+              <View style={s.btnWrapper}>
+                <LabelBtn
+                  mode="contained"
+                  onPress={handleSubmit}
+                  label={SUBMIT_BTN_LABEL}
+                />
+              </View>
             </ScrollView>
           );
         }}

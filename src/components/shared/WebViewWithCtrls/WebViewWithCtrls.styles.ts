@@ -41,10 +41,7 @@ const styles = (theme: any) =>
       textAlign: 'center',
       marginBottom: 10,
     },
-    shareBtnLabel: {
-      color: theme.colors.secondary,
-      fontWeight: '600',
-    },
+    shareBtnWrapper: { width: 250 },
   });
 
 export default styles;

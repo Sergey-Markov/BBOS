@@ -1,13 +1,8 @@
-import React, { useCallback, useEffect } from 'react';
-import {
-  ScrollView,
-  Text,
-  View,
-  Keyboard,
-  SafeAreaView,
-  Pressable,
-} from 'react-native';
-import { Button, HelperText, TextInput } from 'react-native-paper';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ScrollView, Text, View, Keyboard, SafeAreaView } from 'react-native';
+import { HelperText, TextInput } from 'react-native-paper';
+import LabelBtn from '../../components/shared/LabelBtn/LabelBtn';
+import { COMPLETE_BTN_LABEL } from '../../constants';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { IAuthScreenProps, TRegistration } from '../../interfaces';
 
@@ -17,14 +12,14 @@ const Registration = ({
   navigation,
   route,
 }: IAuthScreenProps<'Registration'>) => {
-  const [isSecured, setIsSecured] = React.useState(true);
-  const [value, setValue] = React.useState<TRegistration>({
+  const [isSecured, setIsSecured] = useState(true);
+  const [value, setValue] = useState<TRegistration>({
     email: '',
     password: '',
     confirmPassword: '',
   });
-  const [isConfirmPassword, setConfirmPassword] =
-    React.useState<boolean>(false);
+  const [isConfirmPassword, setConfirmPassword] = useState<boolean>(false);
+  const theme = useAppTheme();
 
   const togglePasswordVisibility = () => {
     setIsSecured(!isSecured);
@@ -46,7 +41,6 @@ const Registration = ({
     setConfirmPassword(true);
   }, [value]);
 
-  const theme = useAppTheme();
   useEffect(() => {
     if (value.password.length > 4 && value.confirmPassword.length > 4) {
       checkPassword();
@@ -106,28 +100,21 @@ const Registration = ({
             Password is invalid, try again!
           </HelperText>
         </View>
-        <Button
-          style={s(theme).buttonContent}
-          disabled={isConfirmPassword && value.email.length > 4 ? false : true}
-          dark={true}
+        <LabelBtn
           mode="contained"
-          uppercase={true}
+          bordered
+          label={COMPLETE_BTN_LABEL}
           onPress={() => {
             console.log('confirmPassword', isConfirmPassword);
-            console.log('Send data to server');
           }}
-        >
-          Complete
-        </Button>
-        <Pressable
-          style={s(theme).registrationLinkBox}
+        />
+        <LabelBtn
           onPress={() => {
-            console.log('go to Registration page');
             navigation.navigate('Login');
           }}
         >
           <Text style={s(theme).registrationLinkText}>Back to Sign in</Text>
-        </Pressable>
+        </LabelBtn>
       </SafeAreaView>
     </ScrollView>
   );

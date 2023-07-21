@@ -28,7 +28,7 @@ const styles = (theme: any) =>
       top: -10,
       marginLeft: 30,
     },
-    commentBtn: {
+    commentBtnWrapper: {
       alignSelf: 'flex-end',
       marginRight: 10,
     },

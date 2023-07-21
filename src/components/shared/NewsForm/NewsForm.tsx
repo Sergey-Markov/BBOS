@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { TextInput } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -13,6 +13,7 @@ import {
 } from '../../../constants';
 
 import s from './NewsForm.styles';
+import LabelBtn from '../LabelBtn/LabelBtn';
 
 const initialValues = {
   title: '',
@@ -105,7 +106,11 @@ const NewsForm = () => {
                 value={values.link}
                 isModalVisible={isModalVisible}
               />
-              <Button onPress={handleSubmit} title={SUBMIT_BTN_LABEL} />
+              <LabelBtn
+                mode="contained"
+                label={SUBMIT_BTN_LABEL}
+                onPress={handleSubmit}
+              />
             </ScrollView>
           );
         }}

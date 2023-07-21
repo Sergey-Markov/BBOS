@@ -11,6 +11,7 @@ import ModalWrapper from '../ModalWrapper/ModalWrapper';
 import { PREV_BTN_LABEL, SHARE_BTN_LABEL } from '../../../constants';
 
 import s from './WebViewWithCtrls.styles';
+import LabelBtn from '../LabelBtn/LabelBtn';
 
 interface IWebViewWithCtrlsProps {
   url: string;
@@ -157,11 +158,13 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
           <Text style={s(theme).qrCodeLink} selectable>
             {currentUrl}
           </Text>
-          <Pressable onPress={shareContent}>
-            <Text variant="titleLarge" style={s(theme).shareBtnLabel}>
-              {SHARE_BTN_LABEL}
-            </Text>
-          </Pressable>
+          <View style={s(theme).shareBtnWrapper}>
+            <LabelBtn
+              mode="contained"
+              label={SHARE_BTN_LABEL}
+              onPress={shareContent}
+            />
+          </View>
         </View>
       </ModalWrapper>
     </View>

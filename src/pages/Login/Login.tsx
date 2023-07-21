@@ -1,41 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Pressable, Text, View, Keyboard, ScrollView } from 'react-native';
-import { TextInput, Checkbox, Button } from 'react-native-paper';
+import { TextInput, Checkbox } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import LabelBtn from '../../components/shared/LabelBtn/LabelBtn';
+import {
+  FORGOT_PASSWORD_LINK_LABEL,
+  LOGIN_BTN_LABEL,
+  REGISTRATION_LINK_LABEL,
+} from '../../constants';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { IAuthScreenProps } from '../../interfaces';
 
 import s from './Login.styles';
 
-const secondaryBtns = [
+const SECONDARY_BTNS = [
   {
     title: 'log in with facebook',
     icon: 'facebook',
-    onPress: () => console.log('Pressed facebook'),
   },
   {
     title: 'log in with apple',
     icon: 'apple',
-    onPress: () => console.log('Pressed apple'),
   },
   {
     title: 'log in with google',
     icon: 'google',
-    onPress: () => console.log('Pressed google'),
   },
 ];
 
 const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
-  const [checked, setChecked] = React.useState(false);
-  const [isSecured, setIsSecured] = React.useState(true);
-
-  route.params?.screen;
+  const [checked, setChecked] = useState(false);
+  const [isSecured, setIsSecured] = useState(true);
+  const theme = useAppTheme();
 
   const togglePasswordVisibility = () => {
     setIsSecured(!isSecured);
   };
 
-  const theme = useAppTheme();
   return (
     <ScrollView
       keyboardShouldPersistTaps="never"
@@ -72,7 +73,7 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
           />
         </View>
         <View style={s(theme).rememberBox}>
-          <View style={s(theme).formCheckbox}>
+          <Pressable style={s(theme).formCheckbox}>
             <Checkbox.Item
               position="leading"
               mode="android"
@@ -84,46 +85,40 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
                 setChecked(!checked);
               }}
             />
-          </View>
-          <Pressable onPress={() => console.log('Press Forgot password')}>
-            <Text style={s(theme).forgotPassword}>Forgot password?</Text>
           </Pressable>
+          <LabelBtn onPress={() => console.log('Press Forgot password')}>
+            <Text style={s(theme).forgotPassword}>
+              {FORGOT_PASSWORD_LINK_LABEL}
+            </Text>
+          </LabelBtn>
         </View>
-        <Button
-          style={s(theme).buttonContent}
-          dark={true}
+
+        <LabelBtn
+          label={LOGIN_BTN_LABEL}
           mode="contained"
-          uppercase={true}
+          bordered
           onPress={() => console.log('Pressed')}
-        >
-          Log in
-        </Button>
+        />
         <View style={s(theme).btnsGroupe}>
-          {secondaryBtns.map((btn, index) => (
-            <Button
+          {SECONDARY_BTNS.map((btn, index) => (
+            <LabelBtn
               key={index}
-              style={s(theme).secondaryBtn}
-              dark={true}
+              label={btn.title}
               mode="contained"
-              uppercase={true}
-              onPress={btn.onPress}
+              bordered
+              secondary
               icon={btn.icon}
-            >
-              {btn.title}
-            </Button>
+              onPress={() => console.log('Pressed')}
+            />
           ))}
         </View>
-        <Pressable
-          style={s(theme).registrationLinkBox}
+        <LabelBtn
           onPress={() => {
-            console.log('go to Registration page');
             navigation.navigate('Registration');
           }}
         >
-          <Text style={s(theme).forgotPassword}>
-            Don`t have an account? Sign up
-          </Text>
-        </Pressable>
+          <Text style={s(theme).forgotPassword}>{REGISTRATION_LINK_LABEL}</Text>
+        </LabelBtn>
       </SafeAreaView>
     </ScrollView>
   );

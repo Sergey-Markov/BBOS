@@ -34,13 +34,6 @@ const styles = (theme: any) =>
       width: '100%',
       gap: 10,
     },
-    buttonContent: {
-      backgroundColor: theme.colors.primary,
-      borderRadius: theme.roundness,
-    },
-    registrationLinkBox: {
-      alignSelf: 'center',
-    },
     registrationLinkText: {
       alignSelf: 'flex-end',
       color: theme.colors.primary,

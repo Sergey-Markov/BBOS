@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     gap: 10,
   },
+  btnWrapper: {
+    marginTop: 30,
+  },
 });
 
 export default styles;

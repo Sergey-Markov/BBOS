@@ -46,3 +46,8 @@ export const NO_CAMERA_PERMISSION_STR = 'No access to camera';
 export const WEATHER_INITIAL_IMG_URL = 'http://openweathermap.org/img/w/';
 
 export const PREV_BTN_LABEL = 'prev';
+
+export const LOGIN_BTN_LABEL = 'log in';
+export const COMPLETE_BTN_LABEL = 'Complete';
+export const REGISTRATION_LINK_LABEL = 'Don`t have an account? Sign up';
+export const FORGOT_PASSWORD_LINK_LABEL = 'Forgot password?';

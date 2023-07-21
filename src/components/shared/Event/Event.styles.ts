@@ -24,13 +24,8 @@ const styles = (theme: any) =>
       alignItems: 'center',
       gap: 5,
     },
-    btnCommentLabel: {
-      color: theme.colors.background,
-      ...theme.fonts.labelMedium,
-    },
-    btnShareLabel: {
-      color: theme.colors.primary,
-      ...theme.fonts.labelMedium,
+    actionBtnsWrapper: {
+      gap: 5,
     },
   });
 

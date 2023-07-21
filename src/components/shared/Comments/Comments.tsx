@@ -1,6 +1,6 @@
 import React, { RefAttributes, useCallback } from 'react';
 import { TextInput, View } from 'react-native';
-import { Avatar, Button, Text, TextInputProps } from 'react-native-paper';
+import { Avatar, Text, TextInputProps } from 'react-native-paper';
 import moment from 'moment';
 import { TComment, TPost } from '../../../interfaces';
 import { useAppTheme } from '../../../hooks/useAppTheme';
@@ -11,6 +11,7 @@ import {
 } from '../../../constants';
 
 import s from './Comments.styles';
+import LabelBtn from '../LabelBtn/LabelBtn';
 
 interface ICommentsProps {
   data: TPost;
@@ -22,7 +23,6 @@ const Comments = ({ data, inputRef, addComment }: ICommentsProps) => {
   const theme = useAppTheme();
 
   const addCommentHandler = useCallback((id: string | number) => {
-    console.log('www');
     addComment((prev) => {
       return {
         ...prev,
@@ -87,14 +87,14 @@ const Comments = ({ data, inputRef, addComment }: ICommentsProps) => {
                         </View>
                       );
                     })}
-                  <Button
-                    style={s(theme).commentBtn}
-                    onPress={() => {
-                      addCommentHandler(comment.id);
-                    }}
-                  >
-                    {COMMENT_BTN_LABEL}
-                  </Button>
+                  <View style={s(theme).commentBtnWrapper}>
+                    <LabelBtn
+                      label={COMMENT_BTN_LABEL}
+                      onPress={() => {
+                        addCommentHandler(comment.id);
+                      }}
+                    />
+                  </View>
                 </View>
               )}
             </View>
