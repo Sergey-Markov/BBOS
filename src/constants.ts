@@ -44,3 +44,5 @@ export const CAMERA_PERMISSION_STR = 'Requesting for camera permission';
 export const NO_CAMERA_PERMISSION_STR = 'No access to camera';
 
 export const WEATHER_INITIAL_IMG_URL = 'http://openweathermap.org/img/w/';
+
+export const PREV_BTN_LABEL = 'prev';

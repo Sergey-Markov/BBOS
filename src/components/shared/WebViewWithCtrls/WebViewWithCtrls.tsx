@@ -8,9 +8,9 @@ import NotFound from '../../../pages/NotFound/NotFound';
 import Spiner from '../Spiner/Spiner';
 import { QRCode } from 'react-native-custom-qr-codes-expo';
 import ModalWrapper from '../ModalWrapper/ModalWrapper';
+import { PREV_BTN_LABEL, SHARE_BTN_LABEL } from '../../../constants';
 
 import s from './WebViewWithCtrls.styles';
-import { SHARE_BTN_LABEL } from '../../../constants';
 
 interface IWebViewWithCtrlsProps {
   url: string;
@@ -95,7 +95,7 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
           onPress={handleBackButton}
           textColor={btnTextColorsBack}
         >
-          <Text variant="labelSmall">prev</Text>
+          <Text variant="labelSmall">{PREV_BTN_LABEL}</Text>
         </Button>
         <Pressable onPress={toggleModal}>
           <QRCode
@@ -122,7 +122,7 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
           onPress={handleForwardButton}
           textColor={btnTextColorsForward}
         >
-          <Text variant="labelSmall">prev</Text>
+          <Text variant="labelSmall">{PREV_BTN_LABEL}</Text>
         </Button>
       </View>
       <WebView
