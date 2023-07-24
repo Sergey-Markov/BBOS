@@ -175,13 +175,13 @@ const EventForm = () => {
                 <Text>Date:</Text>
                 <Text>{selectedDate}</Text>
                 <IconButton
-                  icon={'calendar'}
+                  icon="calendar"
                   iconColor={theme.colors.primary}
                   onPress={toggleCalendarShow}
                 />
                 <Text>{selectedTime}</Text>
                 <IconButton
-                  icon={'alarm'}
+                  icon="alarm"
                   iconColor={theme.colors.primary}
                   onPress={toggleTimeShow}
                 />
