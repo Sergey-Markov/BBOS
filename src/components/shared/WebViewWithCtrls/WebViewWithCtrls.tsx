@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { BackHandler, Pressable, View, Share } from 'react-native';
 import { Text } from 'react-native-paper';
+import LabelBtn from '../LabelBtn/LabelBtn';
+import WebCtrlBtn from '../WebCtrlBtn/WebCtrlBtn';
 import WebView from 'react-native-webview';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import NotFound from '../../../pages/NotFound/NotFound';
@@ -11,8 +13,6 @@ import ModalWrapper from '../ModalWrapper/ModalWrapper';
 import { SHARE_BTN_LABEL } from '../../../constants';
 
 import s from './WebViewWithCtrls.styles';
-import LabelBtn from '../LabelBtn/LabelBtn';
-import WebCtrlBtn from '../WebCtrlBtn/WebCtrlBtn';
 
 interface IWebViewWithCtrlsProps {
   url: string;
