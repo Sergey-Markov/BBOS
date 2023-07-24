@@ -18,6 +18,25 @@ interface IFoodServiceItemProps {
   };
 }
 
+const BTNS_ARR = [
+  {
+    id: '1',
+    iconName: 'phone',
+    onPress: (tel: string[] | string) => callPhoneHandler(tel as string[]),
+  },
+  {
+    id: '2',
+    iconName: 'web',
+    onPress: (url: string[] | string) => goToUrl(url as string),
+  },
+  {
+    id: '3',
+    iconName: 'google-maps',
+    onPress: (address: string[] | string) =>
+      openGoogleMapHandler(address as string),
+  },
+];
+
 const FoodServiceItem = ({ item }: IFoodServiceItemProps) => {
   const { name, tel, url, address } = item;
   const theme = useAppTheme();
@@ -30,17 +49,23 @@ const FoodServiceItem = ({ item }: IFoodServiceItemProps) => {
         </Text>
       </View>
       <View style={s(theme).iconsBox}>
-        <IconButton icon="phone" onPress={() => callPhoneHandler(tel)} />
-        <IconButton
-          icon="web"
-          onPress={() => goToUrl(url)}
-          iconColor={theme.colors.primary}
-        />
-        <IconButton
-          icon="google-maps"
-          onPress={() => openGoogleMapHandler(address)}
-          iconColor={theme.colors.primary}
-        />
+        {BTNS_ARR.map(({ id, iconName, onPress }) => {
+          const isphoneItem = iconName === 'phone';
+          const isUrlItem = iconName === 'web';
+          const currentStrParam = isUrlItem ? url : address;
+          const currentParamPressHandler = isphoneItem ? tel : currentStrParam;
+
+          return (
+            <IconButton
+              key={id}
+              icon={iconName}
+              onPress={() => onPress(currentParamPressHandler)}
+              iconColor={
+                isphoneItem ? theme.onSurfaceVariant : theme.colors.primary
+              }
+            />
+          );
+        })}
       </View>
     </View>
   );
