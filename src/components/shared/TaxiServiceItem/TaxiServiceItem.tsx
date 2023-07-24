@@ -16,6 +16,19 @@ interface ITaxiServiceItemProps {
   };
 }
 
+const BTNS_ARR = [
+  {
+    id: '1',
+    iconName: 'phone',
+    onPress: (tel: string[] | string) => callPhoneHandler(tel as string[]),
+  },
+  {
+    id: '2',
+    iconName: 'web',
+    onPress: (url: string[] | string) => goToUrl(url as string),
+  },
+];
+
 const TaxiServiceItem = ({ item }: ITaxiServiceItemProps) => {
   const { name, tel, url } = item;
   const theme = useAppTheme();
@@ -28,12 +41,22 @@ const TaxiServiceItem = ({ item }: ITaxiServiceItemProps) => {
         </Text>
       </View>
       <View style={s(theme).iconsBox}>
-        <IconButton icon="phone" onPress={() => callPhoneHandler(tel)} />
-        <IconButton
-          icon="web"
-          onPress={() => goToUrl(url)}
-          iconColor={theme.colors.primary}
-        />
+        {BTNS_ARR.map(({ id, onPress, iconName }) => {
+          const isphoneItem = iconName === 'phone';
+          const currentIconColor = isphoneItem
+            ? theme.onSurface
+            : theme.colors.primary;
+          const currentParamPressHandler = isphoneItem ? tel : url;
+
+          return (
+            <IconButton
+              key={id}
+              icon={iconName}
+              onPress={() => onPress(currentParamPressHandler)}
+              iconColor={currentIconColor}
+            />
+          );
+        })}
       </View>
     </View>
   );
