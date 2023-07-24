@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
 import { Formik, FormikValues } from 'formik';
-import { IconButton, Text, TextInput } from 'react-native-paper';
+import { IconButton, Text } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { DatePickerModal } from 'react-native-paper-dates';
 import { registerTranslation } from 'react-native-paper-dates';
@@ -21,6 +21,7 @@ import {
   SUBMIT_BTN_LABEL,
 } from '../../../constants';
 import LabelBtn from '../LabelBtn/LabelBtn';
+import InputCustom from '../InputCustom/InputCustom';
 
 registerTranslation('ru', {
   save: 'Зберегти',
@@ -60,6 +61,24 @@ type TDateParam = {
 };
 type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
 
+const INPUTS_ARR = [
+  {
+    id: '1',
+    label: INPUT_TITLE_LABEL,
+    value: 'title',
+  },
+  {
+    id: '2',
+    label: INPUT_LOCATION_LABEL,
+    value: 'location',
+  },
+  {
+    id: '3',
+    label: INPUT_DESCRIPTION_LABEL,
+    value: 'description',
+  },
+];
+
 const EventForm = () => {
   const [isShowCalendar, setIsShowCalendar] = useState(false);
   const [isShowTimePicker, setIsShowTimePicker] = useState(false);
@@ -68,6 +87,7 @@ const EventForm = () => {
   const toggleCalendarShow = useCallback(() => {
     setIsShowCalendar((prev) => !prev);
   }, []);
+
   const toggleTimeShow = useCallback(() => {
     setIsShowTimePicker((prev) => !prev);
   }, []);
@@ -85,7 +105,7 @@ const EventForm = () => {
           values,
           setFieldValue,
         }: FormikValues) => {
-          const ressetFieldHandler = useCallback((field: TValues) => {
+          const resetFieldHandler = useCallback((field: TValues) => {
             setFieldValue(field, initialValues[field]);
           }, []);
 
@@ -120,57 +140,25 @@ const EventForm = () => {
               <ImgPicker
                 data={values.image}
                 onChange={handleImgChange}
-                onReset={() => ressetFieldHandler('image')}
+                onReset={() => resetFieldHandler('image')}
               />
-              <TextInput
-                mode="outlined"
-                label={INPUT_TITLE_LABEL}
-                right={
-                  <TextInput.Icon
-                    icon="close"
-                    size={20}
-                    onPress={() => ressetFieldHandler('title')}
+              {INPUTS_ARR.map((item) => {
+                return (
+                  <InputCustom
+                    key={item.id}
+                    label={item.label}
+                    value={values[item.value]}
+                    onReset={() =>
+                      resetFieldHandler(
+                        item.value as 'title' | 'description' | 'location'
+                      )
+                    }
+                    onChange={handleChange(item.value)}
+                    onBlur={handleBlur(item.value)}
+                    multiline
                   />
-                }
-                value={values.title}
-                onChangeText={handleChange('title')}
-                onBlur={handleBlur('title')}
-                textBreakStrategy="balanced"
-                multiline
-              />
-              <TextInput
-                mode="outlined"
-                label={INPUT_LOCATION_LABEL}
-                right={
-                  <TextInput.Icon
-                    icon="close"
-                    size={20}
-                    onPress={() => ressetFieldHandler('location')}
-                  />
-                }
-                value={values.location}
-                onChangeText={handleChange('location')}
-                onBlur={handleBlur('location')}
-                textBreakStrategy="balanced"
-                multiline
-              />
-              <TextInput
-                mode="outlined"
-                label={INPUT_DESCRIPTION_LABEL}
-                right={
-                  <TextInput.Icon
-                    icon="close"
-                    size={20}
-                    onPress={() => ressetFieldHandler('description')}
-                  />
-                }
-                value={values.description}
-                onChangeText={handleChange('description')}
-                onBlur={handleBlur('description')}
-                textBreakStrategy="balanced"
-                multiline
-              />
-
+                );
+              })}
               <View style={s.dateBox}>
                 <Text>Date:</Text>
                 <Text>{selectedDate}</Text>
