@@ -48,7 +48,7 @@ const NewsForm = () => {
           values,
           setFieldValue,
         }: FormikValues) => {
-          const ressetFieldHandler = useCallback((field: TValues) => {
+          const resetFieldHandler = useCallback((field: TValues) => {
             setFieldValue(field, initialValues[field]);
           }, []);
 
@@ -64,7 +64,7 @@ const NewsForm = () => {
               <ImgPicker
                 data={values.image}
                 onChange={handleImgChange}
-                onReset={() => ressetFieldHandler('image')}
+                onReset={() => resetFieldHandler('image')}
               />
               <TextInput
                 mode="outlined"
@@ -73,7 +73,7 @@ const NewsForm = () => {
                   <TextInput.Icon
                     icon="close"
                     size={20}
-                    onPress={() => ressetFieldHandler('title')}
+                    onPress={() => resetFieldHandler('title')}
                   />
                 }
                 value={values.title}
@@ -89,7 +89,7 @@ const NewsForm = () => {
                   <TextInput.Icon
                     icon="close"
                     size={20}
-                    onPress={() => ressetFieldHandler('description')}
+                    onPress={() => resetFieldHandler('description')}
                   />
                 }
                 value={values.description}
@@ -100,7 +100,7 @@ const NewsForm = () => {
               />
 
               <GoogleFormInputModal
-                onReset={() => ressetFieldHandler('link')}
+                onReset={() => resetFieldHandler('link')}
                 onChange={handleChange('link')}
                 onModalToggler={modalToggler}
                 value={values.link}
