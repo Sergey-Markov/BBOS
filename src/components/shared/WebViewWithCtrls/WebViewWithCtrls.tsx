@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { BackHandler, Pressable, View, Share } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 import WebView from 'react-native-webview';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import NotFound from '../../../pages/NotFound/NotFound';
 import Spiner from '../Spiner/Spiner';
 import { QRCode } from 'react-native-custom-qr-codes-expo';
 import ModalWrapper from '../ModalWrapper/ModalWrapper';
-import { PREV_BTN_LABEL, SHARE_BTN_LABEL } from '../../../constants';
+import { SHARE_BTN_LABEL } from '../../../constants';
 
 import s from './WebViewWithCtrls.styles';
 import LabelBtn from '../LabelBtn/LabelBtn';
+import WebCtrlBtn from '../WebCtrlBtn/WebCtrlBtn';
 
 interface IWebViewWithCtrlsProps {
   url: string;
@@ -70,34 +71,10 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
     };
   }, [canGoBack]);
 
-  const btnTextColorsForward = canGoForward
-    ? theme.colors.whiteText
-    : undefined;
-  const btnTextColorsBack = canGoBack ? theme.colors.whiteText : undefined;
-  const backgroundColorBtnBack = !canGoBack
-    ? theme.elevation.level5
-    : theme.colors.secondary;
-  const backgroundColorBtnForward = !canGoForward
-    ? theme.elevation.level5
-    : theme.colors.secondary;
-
   return (
     <View style={s(theme).container}>
       <View style={s(theme).containerCtrlBtns}>
-        <Button
-          style={{
-            ...s(theme).ctrlBtnLeft,
-            backgroundColor: backgroundColorBtnBack,
-          }}
-          contentStyle={s(theme).ctrlBtnContent}
-          disabled={!canGoBack}
-          icon="arrow-u-left-top"
-          mode="text"
-          onPress={handleBackButton}
-          textColor={btnTextColorsBack}
-        >
-          <Text variant="labelSmall">{PREV_BTN_LABEL}</Text>
-        </Button>
+        <WebCtrlBtn canGoBack={canGoBack} onBackPress={handleBackButton} />
         <Pressable onPress={toggleModal}>
           <QRCode
             content={currentUrl}
@@ -108,23 +85,10 @@ const WebViewWithCtrls = ({ url }: IWebViewWithCtrlsProps) => {
             ecl="M"
           />
         </Pressable>
-        <Button
-          style={{
-            ...s(theme).ctrlBtnRight,
-            backgroundColor: backgroundColorBtnForward,
-          }}
-          disabled={!canGoForward}
-          contentStyle={{
-            ...s(theme).ctrlBtnContent,
-            flexDirection: 'row-reverse',
-          }}
-          icon="arrow-u-right-top"
-          mode="text"
-          onPress={handleForwardButton}
-          textColor={btnTextColorsForward}
-        >
-          <Text variant="labelSmall">{PREV_BTN_LABEL}</Text>
-        </Button>
+        <WebCtrlBtn
+          canGoForward={canGoForward}
+          onForwardPress={handleForwardButton}
+        />
       </View>
       <WebView
         ref={webviewRef}
