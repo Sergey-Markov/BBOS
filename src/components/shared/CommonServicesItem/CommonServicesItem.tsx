@@ -16,6 +16,21 @@ interface ICommonServicesItemProps {
   };
 }
 
+const BTNS_ARR = [
+  {
+    id: '1',
+    iconName: 'phone',
+    onPress: (tel: string[] | string) => callPhoneHandler(tel as string[]),
+  },
+  {
+    id: '2',
+    iconName: 'google-maps',
+    onPress: (address: string | string[]) =>
+      openGoogleMapHandler(address as string),
+    iconColor: true,
+  },
+];
+
 const CommonServicesItem = ({ item }: ICommonServicesItemProps) => {
   const { name, tel, address } = item;
   const theme = useAppTheme();
@@ -28,12 +43,20 @@ const CommonServicesItem = ({ item }: ICommonServicesItemProps) => {
         </Text>
       </View>
       <View style={s(theme).iconsBox}>
-        <IconButton icon="phone" onPress={() => callPhoneHandler(tel)} />
-        <IconButton
-          icon="google-maps"
-          onPress={() => openGoogleMapHandler(address)}
-          iconColor={theme.colors.primary}
-        />
+        {BTNS_ARR.map(({ id, iconName, onPress }) => {
+          const isphoneItem = iconName === 'phone';
+          const currentParamPressHandler = isphoneItem ? tel : address;
+          return (
+            <IconButton
+              key={id}
+              icon={iconName}
+              onPress={() => onPress(currentParamPressHandler)}
+              iconColor={
+                isphoneItem ? theme.onSurfaceVariant : theme.colors.primary
+              }
+            />
+          );
+        })}
       </View>
     </View>
   );
