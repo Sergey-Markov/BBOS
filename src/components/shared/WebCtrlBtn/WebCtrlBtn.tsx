@@ -40,17 +40,15 @@ const WebCtrlBtn = ({
     <Button
       style={[
         onBackPress && {
-          ...s(theme).ctrlBtnLeft,
+          ...s.ctrlBtnLeft,
           backgroundColor: backgroundColorBtnBack,
         },
         onForwardPress && {
-          ...s(theme).ctrlBtnRight,
+          ...s.ctrlBtnRight,
           backgroundColor: backgroundColorBtnForward,
         },
       ]}
-      contentStyle={
-        onBackPress ? s(theme).ctrlLeftBtnContent : s(theme).ctrlRightBtnContent
-      }
+      contentStyle={onBackPress ? s.ctrlLeftBtnContent : s.ctrlRightBtnContent}
       disabled={onBackPress ? !canGoBack : !canGoForward}
       icon={onBackPress ? 'arrow-u-left-top' : 'arrow-u-right-top'}
       mode="text"
