@@ -15,6 +15,27 @@ import ModalWrapper from '../ModalWrapper/ModalWrapper';
 
 import s from './GoogleFormInputModal.styles';
 
+const MODAL_CTRL_BTNS = [
+  {
+    id: '1',
+    iconName: 'content-save-check',
+  },
+  {
+    id: '2',
+    iconName: 'content-save-off',
+  },
+];
+const SUCCESSFULL_CTRL_BTNS = [
+  {
+    id: '1',
+    iconName: 'link-variant',
+  },
+  {
+    id: '2',
+    iconName: 'link-variant-remove',
+  },
+];
+
 const GoogleFormInputModal = ({
   onReset,
   value,
@@ -68,18 +89,24 @@ const GoogleFormInputModal = ({
           <>
             <Text style={s(theme).textSuccess}>{ADDED_TEXT}</Text>
             <View style={s(theme).successfullBtnsContainer}>
-              <IconButton
-                icon="link-variant"
-                size={30}
-                iconColor={theme.colors.primary}
-                onPress={onModalToggler}
-              />
-              <IconButton
-                icon="link-variant-remove"
-                size={30}
-                iconColor={theme.colors.error}
-                onPress={onReset}
-              />
+              {SUCCESSFULL_CTRL_BTNS.map(({ id, iconName }) => {
+                const isRemoveIcon = iconName === 'link-variant-remove';
+                const currentIconColor = isRemoveIcon
+                  ? theme.colors.error
+                  : theme.colors.primary;
+                const currentPressHandler = isRemoveIcon
+                  ? onReset
+                  : onModalToggler;
+                return (
+                  <IconButton
+                    key={id}
+                    icon={iconName}
+                    size={30}
+                    iconColor={currentIconColor}
+                    onPress={currentPressHandler}
+                  />
+                );
+              })}
             </View>
           </>
         )}
@@ -115,18 +142,26 @@ const GoogleFormInputModal = ({
             multiline
           />
           <View style={s(theme).modalBtnsContainer}>
-            <IconButton
-              icon="content-save-check"
-              size={50}
-              iconColor={theme.colors.primary}
-              onPress={onModalToggler}
-            />
-            <IconButton
-              icon="content-save-off"
-              size={50}
-              iconColor={theme.colors.error}
-              onPress={cancelHandler}
-            />
+            {MODAL_CTRL_BTNS.map(({ id, iconName }) => {
+              const isSaveBtn = iconName === 'content-save-check';
+              const currentIconColor = isSaveBtn
+                ? theme.colors.primary
+                : theme.colors.error;
+
+              const currentPressHandler = isSaveBtn
+                ? onModalToggler
+                : cancelHandler;
+
+              return (
+                <IconButton
+                  key={id}
+                  icon={iconName}
+                  size={50}
+                  iconColor={currentIconColor}
+                  onPress={currentPressHandler}
+                />
+              );
+            })}
           </View>
         </KeyboardAwareScrollView>
       </ModalWrapper>
