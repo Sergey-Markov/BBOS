@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native';
 import { Formik, FormikValues } from 'formik';
-import { TextInput } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
 import ImgPicker from '../ImgPicker/ImgPicker';
