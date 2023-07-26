@@ -14,6 +14,7 @@ import LabelBtn from '../LabelBtn/LabelBtn';
 
 import s from './PostForm.styles';
 import InputCustom from '../InputCustom/InputCustom';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const INPUTS_ARR = [
   {
@@ -39,10 +40,13 @@ const initialValues = {
 
 type TInitialValues = typeof initialValues;
 type TValues = keyof TInitialValues;
-
 type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
 
-const PostForm = () => {
+interface IPostForm {
+  scrollRef: React.RefObject<KeyboardAwareScrollView>;
+}
+
+const PostForm = ({ scrollRef }: IPostForm) => {
   return (
     <SafeAreaView style={s.container}>
       <Formik
@@ -82,6 +86,7 @@ const PostForm = () => {
                     }
                     onChange={handleChange(name)}
                     onBlur={handleBlur(name)}
+                    scrollRef={scrollRef}
                     multiline
                   />
                 );

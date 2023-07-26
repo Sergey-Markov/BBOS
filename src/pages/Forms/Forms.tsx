@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import React, { useEffect, useRef } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Text } from 'react-native-paper';
 import EventForm from '../../components/shared/EventForm/EventForm';
-import GoBackBtn from '../../components/shared/GoBackBtn/GoBackBtn';
 import NewsForm from '../../components/shared/NewsForm/NewsForm';
 import PostForm from '../../components/shared/PostForm/PostForm';
 import { IScreenProps } from '../../interfaces';
@@ -13,6 +9,7 @@ const Forms = ({ navigation, route }: IScreenProps<'Forms'>) => {
   if (!route.params) {
     return null;
   }
+  const scrollRef = useRef<KeyboardAwareScrollView>(null);
   const { formTitle } = route.params;
 
   useEffect(() => {
@@ -24,20 +21,20 @@ const Forms = ({ navigation, route }: IScreenProps<'Forms'>) => {
   switch (formTitle) {
     case 'Add Event':
       return (
-        <KeyboardAwareScrollView extraHeight={120}>
-          <EventForm />
+        <KeyboardAwareScrollView extraHeight={120} ref={scrollRef}>
+          <EventForm scrollRef={scrollRef} />
         </KeyboardAwareScrollView>
       );
     case 'Add News':
       return (
-        <KeyboardAwareScrollView extraHeight={120}>
-          <NewsForm />
+        <KeyboardAwareScrollView extraHeight={120} ref={scrollRef}>
+          <NewsForm scrollRef={scrollRef} />
         </KeyboardAwareScrollView>
       );
     case 'Add Post':
       return (
-        <KeyboardAwareScrollView extraHeight={120}>
-          <PostForm />
+        <KeyboardAwareScrollView extraHeight={120} ref={scrollRef}>
+          <PostForm scrollRef={scrollRef} />
         </KeyboardAwareScrollView>
       );
 

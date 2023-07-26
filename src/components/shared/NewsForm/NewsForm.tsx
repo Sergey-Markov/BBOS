@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { ScrollView } from 'react-native-gesture-handler';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
 import ImgPicker from '../ImgPicker/ImgPicker';
 import GoogleFormInputModal from '../GoogleFormInputModal/GoogleFormInputModal';
@@ -40,8 +41,11 @@ type TInitialValues = typeof initialValues;
 type TValues = keyof TInitialValues;
 
 type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
+interface INewsForm {
+  scrollRef: React.RefObject<KeyboardAwareScrollView>;
+}
 
-const NewsForm = () => {
+const NewsForm = ({ scrollRef }: INewsForm) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const modalToggler = useCallback(() => {
@@ -90,6 +94,7 @@ const NewsForm = () => {
                     }
                     onChange={handleChange(name)}
                     onBlur={handleBlur(name)}
+                    scrollRef={scrollRef}
                     multiline
                   />
                 );

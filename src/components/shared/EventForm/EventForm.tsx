@@ -3,16 +3,17 @@ import { View, SafeAreaView } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { IconButton, Text } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { DatePickerModal } from 'react-native-paper-dates';
 import { registerTranslation } from 'react-native-paper-dates';
 import { TimePickerModal } from 'react-native-paper-dates';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
 import { useAppTheme } from '../../../hooks/useAppTheme';
+import LabelBtn from '../LabelBtn/LabelBtn';
+import InputCustom from '../InputCustom/InputCustom';
 import ImgPicker from '../ImgPicker/ImgPicker';
 import moment from 'moment';
 import 'moment/locale/uk';
-
-import s from './EventForm.styles';
 import {
   DATE_PICKER_MODAL_LABEL,
   INPUT_DESCRIPTION_LABEL,
@@ -20,8 +21,8 @@ import {
   INPUT_TITLE_LABEL,
   SUBMIT_BTN_LABEL,
 } from '../../../constants';
-import LabelBtn from '../LabelBtn/LabelBtn';
-import InputCustom from '../InputCustom/InputCustom';
+
+import s from './EventForm.styles';
 
 registerTranslation('ru', {
   save: 'Зберегти',
@@ -60,6 +61,9 @@ type TDateParam = {
   date: Date;
 };
 type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
+interface INewsForm {
+  scrollRef: React.RefObject<KeyboardAwareScrollView>;
+}
 
 const INPUTS_ARR = [
   {
@@ -79,7 +83,7 @@ const INPUTS_ARR = [
   },
 ];
 
-const EventForm = () => {
+const EventForm = ({ scrollRef }: INewsForm) => {
   const [isShowCalendar, setIsShowCalendar] = useState(false);
   const [isShowTimePicker, setIsShowTimePicker] = useState(false);
   const theme = useAppTheme();
@@ -155,6 +159,7 @@ const EventForm = () => {
                     }
                     onChange={handleChange(item.value)}
                     onBlur={handleBlur(item.value)}
+                    scrollRef={scrollRef}
                     multiline
                   />
                 );

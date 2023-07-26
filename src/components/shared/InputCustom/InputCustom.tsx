@@ -1,7 +1,10 @@
 import React from 'react';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TextInput } from 'react-native-paper';
+import { scrollToComponentHandler } from '../../../utils/scrollToComponentHandler';
 
 interface IInputCustom {
+  scrollRef?: React.RefObject<KeyboardAwareScrollView>;
   label: string;
   value: string;
   onReset: () => void;
@@ -10,6 +13,7 @@ interface IInputCustom {
   multiline: boolean;
 }
 const InputCustom = ({
+  scrollRef,
   label,
   value,
   onReset,
@@ -27,6 +31,13 @@ const InputCustom = ({
       onBlur={onBlur}
       textBreakStrategy="balanced"
       multiline={multiline}
+      onContentSizeChange={(e) => {
+        if (scrollRef && e.nativeEvent.contentSize.height > 50) {
+          if (e.currentTarget) {
+            scrollToComponentHandler(e.currentTarget, scrollRef);
+          }
+        }
+      }}
     />
   );
 };
