@@ -1,8 +1,14 @@
 import React from 'react';
 import { TextInput } from 'react-native-paper';
 
-import s from './InputCustom.styles';
-
+interface IInputCustom {
+  label: string;
+  value: string;
+  onReset: () => void;
+  onChange: () => void;
+  onBlur: () => void;
+  multiline: boolean;
+}
 const InputCustom = ({
   label,
   value,
@@ -10,7 +16,7 @@ const InputCustom = ({
   onChange,
   onBlur,
   multiline = false,
-}: any) => {
+}: IInputCustom) => {
   return (
     <TextInput
       mode="outlined"
