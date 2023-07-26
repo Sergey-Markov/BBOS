@@ -5,14 +5,28 @@ import { TextInput } from 'react-native-paper';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
 import ImgPicker from '../ImgPicker/ImgPicker';
 import { ScrollView } from 'react-native-gesture-handler';
-
-import s from './PostForm.styles';
 import {
   INPUT_DESCRIPTION_LABEL,
   INPUT_TITLE_LABEL,
   SUBMIT_BTN_LABEL,
 } from '../../../constants';
 import LabelBtn from '../LabelBtn/LabelBtn';
+
+import s from './PostForm.styles';
+import InputCustom from '../InputCustom/InputCustom';
+
+const INPUTS_ARR = [
+  {
+    id: '1',
+    label: INPUT_TITLE_LABEL,
+    name: 'title',
+  },
+  {
+    id: '2',
+    label: INPUT_DESCRIPTION_LABEL,
+    name: 'description',
+  },
+];
 
 const initialValues = {
   title: '',
@@ -57,38 +71,21 @@ const PostForm = () => {
                 onChange={handleImgChange}
                 onReset={() => resetFieldHandler('image')}
               />
-              <TextInput
-                mode="outlined"
-                label={INPUT_TITLE_LABEL}
-                right={
-                  <TextInput.Icon
-                    icon="close"
-                    size={20}
-                    onPress={() => resetFieldHandler('title')}
+              {INPUTS_ARR.map(({ id, label, name }) => {
+                return (
+                  <InputCustom
+                    key={id}
+                    label={label}
+                    value={values[name]}
+                    onReset={() =>
+                      resetFieldHandler(name as 'title' | 'description')
+                    }
+                    onChange={handleChange(name)}
+                    onBlur={handleBlur(name)}
+                    multiline
                   />
-                }
-                value={values.title}
-                onChangeText={handleChange('title')}
-                onBlur={handleBlur('title')}
-                textBreakStrategy="balanced"
-                multiline
-              />
-              <TextInput
-                mode="outlined"
-                label={INPUT_DESCRIPTION_LABEL}
-                right={
-                  <TextInput.Icon
-                    icon="close"
-                    size={20}
-                    onPress={() => resetFieldHandler('description')}
-                  />
-                }
-                value={values.description}
-                onChangeText={handleChange('description')}
-                onBlur={handleBlur('description')}
-                textBreakStrategy="balanced"
-                multiline
-              />
+                );
+              })}
               <View style={s.btnWrapper}>
                 <LabelBtn
                   mode="contained"

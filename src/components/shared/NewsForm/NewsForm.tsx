@@ -11,9 +11,23 @@ import {
   INPUT_TITLE_LABEL,
   SUBMIT_BTN_LABEL,
 } from '../../../constants';
+import LabelBtn from '../LabelBtn/LabelBtn';
+import InputCustom from '../InputCustom/InputCustom';
 
 import s from './NewsForm.styles';
-import LabelBtn from '../LabelBtn/LabelBtn';
+
+const INPUTS_ARR = [
+  {
+    id: '1',
+    label: INPUT_TITLE_LABEL,
+    name: 'title',
+  },
+  {
+    id: '2',
+    label: INPUT_DESCRIPTION_LABEL,
+    name: 'description',
+  },
+];
 
 const initialValues = {
   title: '',
@@ -66,39 +80,21 @@ const NewsForm = () => {
                 onChange={handleImgChange}
                 onReset={() => resetFieldHandler('image')}
               />
-              <TextInput
-                mode="outlined"
-                label={INPUT_TITLE_LABEL}
-                right={
-                  <TextInput.Icon
-                    icon="close"
-                    size={20}
-                    onPress={() => resetFieldHandler('title')}
+              {INPUTS_ARR.map(({ id, label, name }) => {
+                return (
+                  <InputCustom
+                    key={id}
+                    label={label}
+                    value={values[name]}
+                    onReset={() =>
+                      resetFieldHandler(name as 'title' | 'description')
+                    }
+                    onChange={handleChange(name)}
+                    onBlur={handleBlur(name)}
+                    multiline
                   />
-                }
-                value={values.title}
-                onChangeText={handleChange('title')}
-                onBlur={handleBlur('title')}
-                textBreakStrategy="balanced"
-                multiline
-              />
-              <TextInput
-                mode="outlined"
-                label={INPUT_DESCRIPTION_LABEL}
-                right={
-                  <TextInput.Icon
-                    icon="close"
-                    size={20}
-                    onPress={() => resetFieldHandler('description')}
-                  />
-                }
-                value={values.description}
-                onChangeText={handleChange('description')}
-                onBlur={handleBlur('description')}
-                textBreakStrategy="balanced"
-                multiline
-              />
-
+                );
+              })}
               <GoogleFormInputModal
                 onReset={() => resetFieldHandler('link')}
                 onChange={handleChange('link')}
