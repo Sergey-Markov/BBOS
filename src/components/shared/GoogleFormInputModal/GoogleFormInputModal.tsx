@@ -11,6 +11,7 @@ import {
   TIPS_TEXT,
 } from '../../../constants';
 import { useAppTheme } from '../../../hooks/useAppTheme';
+import InputCustom from '../InputCustom/InputCustom';
 import ModalWrapper from '../ModalWrapper/ModalWrapper';
 
 import s from './GoogleFormInputModal.styles';
@@ -132,13 +133,12 @@ const GoogleFormInputModal = ({
           keyboardShouldPersistTaps="handled"
           extraHeight={120}
         >
-          <TextInput
-            mode="outlined"
+          <InputCustom
             label={GOOGLEFORM_INPUT_LABEL}
-            right={<TextInput.Icon icon="close" size={20} onPress={onReset} />}
             value={value}
-            onChangeText={onChange}
-            textBreakStrategy="balanced"
+            onChange={onChange}
+            onReset={onReset}
+            onBlur={onReset}
             multiline
           />
           <View style={s(theme).modalBtnsContainer}>
