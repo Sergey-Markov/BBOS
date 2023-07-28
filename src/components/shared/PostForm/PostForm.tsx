@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import { Formik, FormikValues } from 'formik';
-import { TextInput } from 'react-native-paper';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
 import ImgPicker from '../ImgPicker/ImgPicker';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -75,6 +74,7 @@ const PostForm = ({ scrollRef }: IPostForm) => {
                 onChange={handleImgChange}
                 onReset={() => resetFieldHandler('image')}
               />
+
               {INPUTS_ARR.map(({ id, label, name }) => {
                 return (
                   <InputCustom
