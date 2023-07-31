@@ -3,12 +3,14 @@ import { Pressable, ScrollView } from 'react-native';
 import { IScreenProps, TPostData } from '../../interfaces';
 import { useFocusEffect } from '@react-navigation/native';
 import Post from '../../components/shared/Post/Post';
-import POSTS from '../../mocks/posts_data.json';
 import AddPostBtn from '../../components/shared/AddPostBtn/AddPostBtn';
 
 import s from './Posts.styles';
+import { useSelector } from 'react-redux';
+import { getPosts } from '../../redux/selectors/postsSelectors/postsSelectors';
 
 const Posts = ({ navigation, route }: IScreenProps<'Posts'>) => {
+  const posts = useSelector(getPosts);
   const [isFormBtn, setFormBtn] = useState<boolean>(false);
 
   useFocusEffect(
@@ -26,7 +28,7 @@ const Posts = ({ navigation, route }: IScreenProps<'Posts'>) => {
 
   return (
     <ScrollView contentContainerStyle={s.container}>
-      {POSTS.data.map((item, index) => {
+      {posts.map((item, index) => {
         return (
           <Pressable
             key={index}
