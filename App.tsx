@@ -1,19 +1,15 @@
-import {
-  // MD3LightTheme as DefaultTheme,
-  PaperProvider,
-  useTheme,
-} from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 import 'react-native-gesture-handler';
 import RootNavigation from './src/pages/RootNavigation';
 import { theme } from './src/hooks/useAppTheme';
-import FormsBtn from './src/components/shared/FormsBtn/FormsBtn';
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
 import { View } from 'react-native';
 import { ThemeProp } from 'react-native-paper/lib/typescript/src/types';
-
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -38,7 +34,9 @@ export default function App() {
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <PaperProvider theme={theme as ThemeProp}>
-        <RootNavigation />
+        <Provider store={store}>
+          <RootNavigation />
+        </Provider>
       </PaperProvider>
     </View>
   );

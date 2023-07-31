@@ -11,6 +11,10 @@ import { Text } from 'react-native-paper';
 
 import DrawerNavigator from './DrawerNavigator';
 import AuthNavigator from './AuthNavigator';
+import { useSelector } from 'react-redux';
+import { userSelector } from '../redux/reducers/usersReducer';
+import { authSelector } from '../redux/reducers/authReducer';
+import { getAuthStatus } from '../redux/selectors/authSelectors/authSelectors';
 
 const prefix = Linking.createURL('/');
 
@@ -27,13 +31,13 @@ function getHeaderTitle(route: string) {
       return 'Posts';
     case 'Chat':
       return 'Chat';
-    case 'Home':
+    default:
       return 'Home';
   }
 }
 
 const RootNavigation = () => {
-  const [isAuth, setIsAuth] = useState<boolean>(true);
+  const authStatus = useSelector(getAuthStatus);
 
   const linking = {
     prefixes: [prefix],
@@ -61,7 +65,7 @@ const RootNavigation = () => {
       linking={linking as LinkingOptions<ParamListBase>}
       fallback={<Text>Loading...</Text>}
     >
-      {isAuth ? (
+      {authStatus !== 'Authorized' ? (
         <DrawerNavigator getHeaderTitle={getHeaderTitle} />
       ) : (
         <AuthNavigator />
