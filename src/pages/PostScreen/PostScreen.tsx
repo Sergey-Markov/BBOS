@@ -5,18 +5,26 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Comments from '../../components/shared/Comments/Comments';
 import CommentsInput from '../../components/shared/CommentsInput/CommentsInput';
 import Post from '../../components/shared/Post/Post';
-import { TComment, TPost, TPostData } from '../../interfaces';
+import { IScreenProps, TComment, TPost, TPostData } from '../../interfaces';
 import { useDispatch } from 'react-redux';
 import { addPostComment } from '../../redux/reducers/postsReducers';
+import { useSelector } from 'react-redux';
+import { getPosts } from '../../redux/selectors/postsSelectors/postsSelectors';
 
-const PostScreen = ({ navigation, route }: any) => {
+const PostScreen = ({ navigation, route }: IScreenProps<'PostScreen'>) => {
   if (!route.params) {
     return null;
   }
   const dispatch = useDispatch();
+  const allPost = useSelector(getPosts);
   const { data, isInputAutoFocused } = route.params;
   const [text, setText] = useState('');
-  const [postData, setPostData] = useState<TPost | TPostData>(data);
+
+  const currentPost = allPost.find((item) => item.id === data?.id);
+
+  if (!currentPost) {
+    return null;
+  }
 
   const [selfComment, setSelfComment] = useState<TComment>({
     id: 0,
@@ -45,18 +53,13 @@ const PostScreen = ({ navigation, route }: any) => {
       id: (Math.random() * 1000).toFixed(0),
     };
 
-    setPostData((prev) => {
-      if (prev) {
-        const updatePost = {
-          ...prev,
-          comments: [...prev.comments, newComment],
-        };
-        dispatch(addPostComment(updatePost));
-
-        return updatePost;
-      }
-    });
-
+    if (currentPost) {
+      const updatePost = {
+        ...currentPost,
+        comments: [...currentPost.comments, newComment],
+      };
+      dispatch(addPostComment(updatePost as TPost));
+    }
     setSelfComment((prev) => {
       return { ...prev, parentId: null, message: '' };
     });
@@ -73,9 +76,9 @@ const PostScreen = ({ navigation, route }: any) => {
       extraHeight={120}
       ref={scrollViewRef}
     >
-      <Post data={postData} isShort={false} inputRef={inputCommentRef} />
+      <Post data={data} isShort={false} inputRef={inputCommentRef} />
       <Comments
-        data={postData as TPost}
+        data={currentPost as any}
         inputRef={inputCommentRef}
         addComment={setSelfComment}
       />

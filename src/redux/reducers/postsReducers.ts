@@ -13,17 +13,16 @@ export const postsSlice = createSlice({
     addPost: (state, action: PayloadAction<TPost>) => {
       [...state, action.payload];
     },
-    addPostComment: (state, action) => {
-      // const currentPost = state.find((item) => item.id === action.payload.id);
-      // const updatePostComments = {
-      //   ...currentPost,
-      // };
-      console.log(state.length);
-      [...state, action.payload];
-      console.log(state.length);
+    addPostComment: (state, action: any) => {
+      const currentPost = state.find((item) => item.id === action.payload.id);
+      if (currentPost) {
+        const indexCurrentPost = state.indexOf(currentPost);
+        state.splice(indexCurrentPost, 1, action.payload);
+      }
     },
   },
 });
+
 export const { addPost, addPostComment } = postsSlice.actions;
 export const postsSelector = (state: RootState) =>
   state.rootReducers.postsReducer;

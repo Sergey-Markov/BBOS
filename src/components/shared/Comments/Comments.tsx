@@ -41,8 +41,9 @@ const Comments = ({ data, inputRef, addComment }: ICommentsProps) => {
           const userNameAvatar = comment.userName.slice(0, 1);
           const dateNormalize = moment(comment.create_at).format('LL HH:mm');
           const commentsFilteredByParentId = array.filter(({ parentId }) => {
-            return parentId === comment.id;
+            return parentId == comment.id;
           });
+          // console.log('commentsFilteredByParentId', commentsFilteredByParentId);
 
           return (
             <View key={comment.id}>
