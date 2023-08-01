@@ -6,11 +6,14 @@ import Comments from '../../components/shared/Comments/Comments';
 import CommentsInput from '../../components/shared/CommentsInput/CommentsInput';
 import Post from '../../components/shared/Post/Post';
 import { TComment, TPost, TPostData } from '../../interfaces';
+import { useDispatch } from 'react-redux';
+import { addPostComment } from '../../redux/reducers/postsReducers';
 
 const PostScreen = ({ navigation, route }: any) => {
   if (!route.params) {
     return null;
   }
+  const dispatch = useDispatch();
   const { data, isInputAutoFocused } = route.params;
   const [text, setText] = useState('');
   const [postData, setPostData] = useState<TPost | TPostData>(data);
@@ -44,10 +47,13 @@ const PostScreen = ({ navigation, route }: any) => {
 
     setPostData((prev) => {
       if (prev) {
-        return {
+        const updatePost = {
           ...prev,
           comments: [...prev.comments, newComment],
         };
+        dispatch(addPostComment(updatePost));
+
+        return updatePost;
       }
     });
 

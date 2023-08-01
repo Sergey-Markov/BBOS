@@ -10,12 +10,21 @@ export const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    addPost: (state, action: PayloadAction<TPosts>) => {
+    addPost: (state, action: PayloadAction<TPost>) => {
       [...state, action.payload];
+    },
+    addPostComment: (state, action) => {
+      // const currentPost = state.find((item) => item.id === action.payload.id);
+      // const updatePostComments = {
+      //   ...currentPost,
+      // };
+      console.log(state.length);
+      [...state, action.payload];
+      console.log(state.length);
     },
   },
 });
-export const { addPost } = postsSlice.actions;
+export const { addPost, addPostComment } = postsSlice.actions;
 export const postsSelector = (state: RootState) =>
   state.rootReducers.postsReducer;
 export default postsSlice.reducer;
