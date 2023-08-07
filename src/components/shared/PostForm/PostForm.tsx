@@ -14,6 +14,10 @@ import LabelBtn from '../LabelBtn/LabelBtn';
 import s from './PostForm.styles';
 import InputCustom from '../InputCustom/InputCustom';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useSelector } from 'react-redux';
+import { getPosts } from '../../../redux/selectors/postsSelectors/postsSelectors';
+import { useDispatch } from 'react-redux';
+import { addPost } from '../../../redux/reducers/postsReducers';
 
 const INPUTS_ARR = [
   {
@@ -31,10 +35,35 @@ const INPUTS_ARR = [
 const initialValues = {
   title: '',
   description: '',
-  date: new Date(),
-  time: { hours: 23, minutes: 30 },
-  location: '',
+  date: new Date().getTime(),
   image: null,
+  about: [
+    {
+      id: '1',
+      name: 'likes',
+      count: 0,
+      icon: 'thumb-up-outline',
+      selectedIcon: 'thumb-up',
+      selected: false,
+    },
+    {
+      id: '2',
+      name: 'dislikes',
+      count: 0,
+      icon: 'thumb-down-outline',
+      selectedIcon: 'thumb-down',
+      selected: false,
+    },
+    {
+      id: '3',
+      name: 'comments',
+      count: 0,
+      icon: 'comment-text-outline',
+      selectedIcon: 'comment-text',
+      selected: false,
+    },
+  ],
+  comments: [],
 };
 
 type TInitialValues = typeof initialValues;
@@ -46,11 +75,21 @@ interface IPostForm {
 }
 
 const PostForm = ({ scrollRef }: IPostForm) => {
+  const allPost = useSelector(getPosts);
+  const dispatch = useDispatch();
   return (
     <SafeAreaView style={s.container}>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          console.log(values.date);
+          const newPost = {
+            ...values,
+            image: values.image?.assets[0].uri ?? null,
+            id: (Math.random() * 1000).toFixed(0).toString(),
+          };
+          dispatch(addPost(newPost));
+        }}
       >
         {({
           handleChange,
@@ -64,6 +103,7 @@ const PostForm = ({ scrollRef }: IPostForm) => {
           }, []);
 
           const handleImgChange = (data: ImagePickerResult) => {
+            console.log('data', data);
             setFieldValue('image', data);
           };
 
@@ -94,7 +134,9 @@ const PostForm = ({ scrollRef }: IPostForm) => {
               <View style={s.btnWrapper}>
                 <LabelBtn
                   mode="contained"
-                  onPress={handleSubmit}
+                  onPress={(e: string) => {
+                    handleSubmit(e);
+                  }}
                   label={SUBMIT_BTN_LABEL}
                 />
               </View>

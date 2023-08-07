@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TPost } from '../../interfaces';
+import { TPost, TPostData } from '../../interfaces';
 import { RootState } from '../store';
 import POSTS from '../../mocks/posts_data.json';
 
@@ -11,9 +11,10 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {
     addPost: (state, action: PayloadAction<TPost>) => {
-      [...state, action.payload];
+      // [...state, action.payload];
+      state.push(action.payload);
     },
-    addPostComment: (state, action: any) => {
+    addPostComment: (state, action: PayloadAction<any>) => {
       const currentPost = state.find((item) => item.id === action.payload.id);
       if (currentPost) {
         const indexCurrentPost = state.indexOf(currentPost);

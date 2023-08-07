@@ -5,11 +5,12 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Comments from '../../components/shared/Comments/Comments';
 import CommentsInput from '../../components/shared/CommentsInput/CommentsInput';
 import Post from '../../components/shared/Post/Post';
-import { IScreenProps, TComment, TPost, TPostData } from '../../interfaces';
+import { IScreenProps, TComment, TPost } from '../../interfaces';
 import { useDispatch } from 'react-redux';
 import { addPostComment } from '../../redux/reducers/postsReducers';
 import { useSelector } from 'react-redux';
 import { getPosts } from '../../redux/selectors/postsSelectors/postsSelectors';
+import { AnyAction } from '@reduxjs/toolkit';
 
 const PostScreen = ({ navigation, route }: IScreenProps<'PostScreen'>) => {
   if (!route.params) {
@@ -27,8 +28,8 @@ const PostScreen = ({ navigation, route }: IScreenProps<'PostScreen'>) => {
   }
 
   const [selfComment, setSelfComment] = useState<TComment>({
-    id: 0,
-    parentId: null,
+    id: '0',
+    parentId: '',
     userName: 'Serhiy',
     userId: '777',
     message: '',
@@ -50,7 +51,7 @@ const PostScreen = ({ navigation, route }: IScreenProps<'PostScreen'>) => {
     const newComment = {
       ...selfComment,
       message: text,
-      id: (Math.random() * 1000).toFixed(0),
+      id: (Math.random() * 1000).toFixed(0).toString(),
     };
 
     if (currentPost) {
@@ -61,7 +62,7 @@ const PostScreen = ({ navigation, route }: IScreenProps<'PostScreen'>) => {
       dispatch(addPostComment(updatePost as TPost));
     }
     setSelfComment((prev) => {
-      return { ...prev, parentId: null, message: '' };
+      return { ...prev, parentId: '', message: '' };
     });
   };
 

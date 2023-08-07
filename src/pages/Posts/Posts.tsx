@@ -4,14 +4,10 @@ import { IScreenProps, TPostData } from '../../interfaces';
 import { useFocusEffect } from '@react-navigation/native';
 import Post from '../../components/shared/Post/Post';
 import AddPostBtn from '../../components/shared/AddPostBtn/AddPostBtn';
+import { useSelector } from 'react-redux';
+import { getPosts } from '../../redux/selectors/postsSelectors/postsSelectors';
 
 import s from './Posts.styles';
-import { useSelector } from 'react-redux';
-import {
-  findPostById,
-  getPosts,
-} from '../../redux/selectors/postsSelectors/postsSelectors';
-import rootReducers from '../../redux/rootReducer';
 
 const Posts = ({ navigation, route }: IScreenProps<'Posts'>) => {
   const posts = useSelector(getPosts);

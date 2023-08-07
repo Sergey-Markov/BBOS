@@ -35,7 +35,7 @@
       "comments": [
         {
           "id": "1",
-          "parentId": null,
+          "parentId": "",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
           "userId": 1,
@@ -43,7 +43,7 @@
         },
         {
           "id": "2",
-          "parentId": 1,
+          "parentId": "1",
           "userName": "Lera",
           "create_at": "2023-07-17T14:23:30.002Z",
           "userId": 2,
@@ -51,34 +51,34 @@
         },
         {
           "id": "3",
-          "parentId": 1,
+          "parentId": "1",
           "userName": "Andriy",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 3,
+          "userId": "3",
           "message": "daun"
         },
         {
           "id": "4",
-          "parentId": 5,
+          "parentId": "5",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "it is true"
         },
         {
           "id": "5",
-          "parentId": null,
+          "parentId": "",
           "userName": "Andriy",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 3,
+          "userId": "3",
           "message": "may be he is a daun"
         },
         {
           "id": "6",
-          "parentId": 5,
+          "parentId": "5",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "not shure"
         }
       ]
@@ -118,49 +118,49 @@
       "comments": [
         {
           "id": "1",
-          "parentId": null,
+          "parentId": "",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "loh lohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohloh lohlohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohlohloh lohloh lohlohlohlohloh lohlohloh loh lohlohlohloh lohlohloh"
         },
         {
           "id": "2",
-          "parentId": 1,
+          "parentId": "1",
           "userName": "Lera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 2,
+          "userId": "2",
           "message": "sam loh"
         },
         {
           "id": "3",
-          "parentId": 1,
+          "parentId": "1",
           "userName": "Andriy",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 3,
+          "userId": "3",
           "message": "daun"
         },
         {
           "id": "4",
-          "parentId": 5,
+          "parentId": "5",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "it is true"
         },
         {
           "id": "5",
-          "parentId": null,
+          "parentId": "",
           "userName": "Andriy",
           "create_at": "2023-07-17T14:23:30.002Z",
           "message": "may be he is a daun"
         },
         {
           "id": "6",
-          "parentId": 5,
+          "parentId": "5",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "not shure"
         }
       ]

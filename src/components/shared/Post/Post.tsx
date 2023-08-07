@@ -16,9 +16,9 @@ import {
   TPost,
   TPostData,
 } from '../../../interfaces';
+import LabelBtn from '../LabelBtn/LabelBtn';
 
 import s from './Post.styles';
-import LabelBtn from '../LabelBtn/LabelBtn';
 
 const BTNS = [
   {
@@ -45,7 +45,9 @@ const Post = ({ data, isShort = true, inputRef }: IPostProps) => {
     >();
   if (!data) return null;
   const { title, description, date, image, about } = data;
-  const normalizeDate = moment(`${date}`).format('LL HH:mm');
+
+  const normalizeDate = moment(new Date(date)).format('LL HH:mm');
+  // const normalizeDate = moment(String(date)).format('LL HH:mm');
   const dateString = `Published: ${normalizeDate}`;
 
   const shareContent = useCallback(async () => {
@@ -69,12 +71,14 @@ const Post = ({ data, isShort = true, inputRef }: IPostProps) => {
     navigation.navigate('PostScreen', { data: data, isInputAutoFocused: true });
   }, []);
 
+  const imgPreview = 'https://picsum.photos/id/390/1920/1080';
   const commentBtnHandler = isShort ? goToPostScreenHandler : focusInputHandler;
 
+  const currentPoster = image ? `${image}` : `${imgPreview}`;
   return (
     <Card style={s(theme).event}>
       <Card.Cover
-        source={{ uri: `${image}` }}
+        source={{ uri: currentPoster }}
         borderBottomLeftRadius={0}
         borderBottomRightRadius={0}
         style={s(theme).cardCover}
