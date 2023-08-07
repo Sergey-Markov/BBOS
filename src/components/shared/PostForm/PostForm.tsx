@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { Alert, SafeAreaView, View } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
 import ImgPicker from '../ImgPicker/ImgPicker';
@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { addPost } from '../../../redux/reducers/postsReducers';
 
 import s from './PostForm.styles';
+import { useNavigation } from '@react-navigation/native';
 
 const INPUTS_ARR = [
   {
@@ -49,6 +50,8 @@ interface IPostForm {
 }
 
 const PostForm = ({ scrollRef }: IPostForm) => {
+  const navigation = useNavigation();
+
   const dispatch = useDispatch();
   const strDate = new Date().toJSON();
 
@@ -57,7 +60,12 @@ const PostForm = ({ scrollRef }: IPostForm) => {
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          if (values.image === null) {
+          if (
+            values.image === null ||
+            values.title.length <= 0 ||
+            values.description.length <= 0
+          ) {
+            Alert.alert('Add fields information');
             return;
           }
           if (values.image.assets) {
@@ -96,6 +104,7 @@ const PostForm = ({ scrollRef }: IPostForm) => {
               id: (Math.random() * 1000).toFixed(0).toString(),
             };
             dispatch(addPost(newPost));
+            navigation.goBack();
           }
         }}
       >
@@ -111,7 +120,6 @@ const PostForm = ({ scrollRef }: IPostForm) => {
           }, []);
 
           const handleImgChange = (data: ImagePickerResult) => {
-            console.log('data', data);
             setFieldValue('image', data);
           };
 
