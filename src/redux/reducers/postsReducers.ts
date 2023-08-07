@@ -10,8 +10,7 @@ export const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    addPost: (state, action: PayloadAction<TPost>) => {
-      // [...state, action.payload];
+    addPost: (state, action: PayloadAction<any>) => {
       state.push(action.payload);
     },
     addPostComment: (state, action: PayloadAction<any>) => {

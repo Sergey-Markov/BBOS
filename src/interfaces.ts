@@ -1,5 +1,6 @@
 import type { RouteProp } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ImagePickerResult } from 'expo-image-picker';
 
 type TChildren = React.ReactNode;
 const timeStamp = new Date().getTime();
@@ -44,7 +45,7 @@ export type TPost = {
   id: string;
   title: string;
   description: string;
-  date: string | number;
+  date: string;
   image: string | null;
   about: TAbout[];
   comments: TComment[] | [];
