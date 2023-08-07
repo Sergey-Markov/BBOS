@@ -1,4 +1,6 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { Alert, SafeAreaView, View } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
@@ -12,11 +14,9 @@ import {
 import LabelBtn from '../LabelBtn/LabelBtn';
 import InputCustom from '../InputCustom/InputCustom';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useDispatch } from 'react-redux';
 import { addPost } from '../../../redux/reducers/postsReducers';
 
 import s from './PostForm.styles';
-import { useNavigation } from '@react-navigation/native';
 
 const INPUTS_ARR = [
   {
