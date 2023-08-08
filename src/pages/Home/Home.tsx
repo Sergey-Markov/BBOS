@@ -5,7 +5,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Swiper from '../../components/shared/Swiper/Swiper';
 import { Text } from 'react-native-paper';
 import Event from '../../components/shared/Event/Event';
-import { EVENTS_DATA } from '../../mocks/eventsMock';
 import Advertising from '../../components/shared/Advertising/Advertising';
 import CommunityNewsList from '../../components/shared/CommunityNewsList/CommunityNewsList';
 import { useFocusEffect } from '@react-navigation/native';
@@ -13,6 +12,9 @@ import FormsBtn from '../../components/shared/FormsBtn/FormsBtn';
 import { useSelector } from 'react-redux';
 import { newsSelector } from '../../redux/reducers/newsReducer';
 import { eventsSelector } from '../../redux/reducers/eventsReducer';
+import { COMMUNITY_EVENTS_STR, COMMUNITY_NEWS_STR } from '../../constants';
+
+import s from './Home.styles';
 
 const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
   const [isFormBtn, setFormBtn] = useState<boolean>(false);
@@ -42,20 +44,23 @@ const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
   };
 
   return (
-    <ScrollView style={{ paddingHorizontal: 10, paddingTop: 5 }}>
-      <Text variant="titleMedium">Community events:</Text>
+    <ScrollView style={s.container}>
+      <Text variant="titleMedium">{COMMUNITY_EVENTS_STR}</Text>
       <Swiper dataOptions={allEvents}>
         {(item) => {
           return (
-            <Pressable onPress={() => goToSelectedEvent(item.id)}>
+            <Pressable
+              style={s.cardContainer}
+              onPress={() => goToSelectedEvent(item.id)}
+            >
               <Event data={item} isShort />
             </Pressable>
           );
         }}
       </Swiper>
       <Advertising />
-      <Text variant="titleMedium" style={{ marginVertical: 5 }}>
-        Community news:
+      <Text variant="titleMedium" style={s.textBox}>
+        {COMMUNITY_NEWS_STR}
       </Text>
       <CommunityNewsList data={allNews} onSelect={goToSelectedCommunityNews} />
       {isFormBtn && <FormsBtn />}

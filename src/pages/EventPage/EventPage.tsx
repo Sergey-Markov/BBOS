@@ -8,24 +8,26 @@ import CommentsInput from '../../components/shared/CommentsInput/CommentsInput';
 import { IScreenProps, TComment, TEventData } from '../../interfaces';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { getCurrentItemById } from '../../utils/getCurrentItemById';
-import { EVENTS_DATA } from '../../mocks/eventsMock';
+import { useSelector } from 'react-redux';
+import { eventsSelector } from '../../redux/reducers/eventsReducer';
 
 import s from './EventPage.styles';
 
 const EventPage = ({ navigation, route }: IScreenProps<'EventPage'>) => {
   const [text, setText] = React.useState('');
   const [selfComment, setSelfComment] = React.useState<TComment>({
-    id: 0,
-    parentId: null,
+    id: '0',
+    parentId: '',
     userName: 'Serhiy',
     userId: '777',
     message: '',
     create_at: new Date().getTime(),
   });
   const theme = useAppTheme();
+  const allEvents = useSelector(eventsSelector);
 
   const { id } = route.params;
-  const eventData = getCurrentItemById(id, EVENTS_DATA);
+  const eventData = getCurrentItemById(id, allEvents);
   type TCurrentEventData = typeof eventData;
 
   const [innerData, setInnerData] = React.useState<
@@ -57,7 +59,7 @@ const EventPage = ({ navigation, route }: IScreenProps<'EventPage'>) => {
     const newComment = {
       ...selfComment,
       message: text,
-      id: (Math.random() * 1000).toFixed(0),
+      id: String((Math.random() * 1000).toFixed(0)),
     };
 
     setInnerData((prev) => {
@@ -70,7 +72,7 @@ const EventPage = ({ navigation, route }: IScreenProps<'EventPage'>) => {
     });
 
     setSelfComment((prev) => {
-      return { ...prev, parentId: null, message: '' };
+      return { ...prev, parentId: '', message: '' };
     });
   };
 

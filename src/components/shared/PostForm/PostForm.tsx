@@ -17,6 +17,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { addPost } from '../../../redux/reducers/postsReducers';
 
 import s from './PostForm.styles';
+import { ABOUT_MOCK } from '../../../mocks/default_data_mock';
 
 const INPUTS_ARR = [
   {
@@ -73,32 +74,7 @@ const PostForm = ({ scrollRef }: IPostForm) => {
             const newPost = {
               ...values,
               date: strDate,
-              about: [
-                {
-                  id: '1',
-                  name: 'likes',
-                  count: 0,
-                  icon: 'thumb-up-outline',
-                  selectedIcon: 'thumb-up',
-                  selected: false,
-                },
-                {
-                  id: '2',
-                  name: 'dislikes',
-                  count: 0,
-                  icon: 'thumb-down-outline',
-                  selectedIcon: 'thumb-down',
-                  selected: false,
-                },
-                {
-                  id: '3',
-                  name: 'comments',
-                  count: 0,
-                  icon: 'comment-text-outline',
-                  selectedIcon: 'comment-text',
-                  selected: false,
-                },
-              ],
+              about: ABOUT_MOCK,
               comments: [],
               image: imgString,
               id: (Math.random() * 1000).toFixed(0).toString(),

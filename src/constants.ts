@@ -3,6 +3,9 @@ export const SHARE_OPTIONS = {
   message: 'install this app and join to our event',
 };
 
+export const COMMUNITY_EVENTS_STR = 'Community events:';
+export const COMMUNITY_NEWS_STR = 'Community news:';
+
 export const NO_COMMENT_STR = 'No comments yet';
 export const COMMENTS_STR = 'Comments:';
 export const COMMENT_BTN_LABEL = 'Comment';
