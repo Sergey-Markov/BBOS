@@ -12,10 +12,13 @@ import { useFocusEffect } from '@react-navigation/native';
 import FormsBtn from '../../components/shared/FormsBtn/FormsBtn';
 import { useSelector } from 'react-redux';
 import { newsSelector } from '../../redux/reducers/newsReducer';
+import { eventsSelector } from '../../redux/reducers/eventsReducer';
 
 const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
   const [isFormBtn, setFormBtn] = useState<boolean>(false);
   const allNews = useSelector(newsSelector);
+  const allEvents = useSelector(eventsSelector);
+
   useFocusEffect(
     useCallback(() => {
       if (!isFormBtn) {
@@ -41,7 +44,7 @@ const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
   return (
     <ScrollView style={{ paddingHorizontal: 10, paddingTop: 5 }}>
       <Text variant="titleMedium">Community events:</Text>
-      <Swiper dataOptions={EVENTS_DATA}>
+      <Swiper dataOptions={allEvents}>
         {(item) => {
           return (
             <Pressable onPress={() => goToSelectedEvent(item.id)}>
