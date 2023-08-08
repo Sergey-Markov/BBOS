@@ -116,7 +116,6 @@ const EventForm = ({ scrollRef }: INewsForm) => {
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          console.log(values);
           if (
             values.image === null ||
             values.title.length <= 0 ||

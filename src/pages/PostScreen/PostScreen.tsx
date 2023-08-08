@@ -7,17 +7,18 @@ import CommentsInput from '../../components/shared/CommentsInput/CommentsInput';
 import Post from '../../components/shared/Post/Post';
 import { IScreenProps, TComment, TPost } from '../../interfaces';
 import { useDispatch } from 'react-redux';
-import { addPostComment } from '../../redux/reducers/postsReducers';
+import {
+  addPostComment,
+  postsSelector,
+} from '../../redux/reducers/postsReducers';
 import { useSelector } from 'react-redux';
-import { getPosts } from '../../redux/selectors/postsSelectors/postsSelectors';
-import { AnyAction } from '@reduxjs/toolkit';
 
 const PostScreen = ({ navigation, route }: IScreenProps<'PostScreen'>) => {
   if (!route.params) {
     return null;
   }
   const dispatch = useDispatch();
-  const allPost = useSelector(getPosts);
+  const allPost = useSelector(postsSelector);
   const { data, isInputAutoFocused } = route.params;
   const [text, setText] = useState('');
 
