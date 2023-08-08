@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
-import { Pressable, Text, View, Keyboard, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  Pressable,
+  Text,
+  View,
+  Keyboard,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import { TextInput, Checkbox } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { auth } from '../../../firebase';
 import LabelBtn from '../../components/shared/LabelBtn/LabelBtn';
 import {
   FORGOT_PASSWORD_LINK_LABEL,
@@ -10,6 +20,11 @@ import {
 } from '../../constants';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { IAuthScreenProps } from '../../interfaces';
+import {
+  authSelector,
+  setAuthStatus,
+  TAuthorizedStatus,
+} from '../../redux/reducers/authReducer';
 
 import s from './Login.styles';
 
@@ -32,11 +47,27 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
   const [checked, setChecked] = useState(false);
   const [isSecured, setIsSecured] = useState(true);
   const theme = useAppTheme();
-
+  const dispatch = useDispatch();
+  const authStatus = useSelector(authSelector);
   const togglePasswordVisibility = () => {
     setIsSecured(!isSecured);
   };
-
+  useEffect(() => {
+    console.log('authStatus', authStatus);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        var uid = user.uid;
+        const statusAutorized: TAuthorizedStatus = {
+          currentAuthorizedStatus: 'Authorized',
+        };
+        dispatch(setAuthStatus(statusAutorized));
+      } else {
+        // User is signed out
+        Alert.alert('need autorized');
+      }
+    });
+    return unsubscribe;
+  }, []);
   return (
     <ScrollView
       keyboardShouldPersistTaps="never"
@@ -97,7 +128,7 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
           label={LOGIN_BTN_LABEL}
           mode="contained"
           bordered
-          onPress={() => console.log('Pressed')}
+          onPress={() => console.log('authStatus', authStatus)}
         />
         <View style={s(theme).btnsGroupe}>
           {SECONDARY_BTNS.map((btn, index) => (
