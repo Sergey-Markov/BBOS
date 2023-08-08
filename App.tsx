@@ -1,3 +1,4 @@
+import React from 'react';
 import { PaperProvider } from 'react-native-paper';
 import 'react-native-gesture-handler';
 import RootNavigation from './src/pages/RootNavigation';

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, Text, View, Keyboard, SafeAreaView } from 'react-native';
 import { HelperText, TextInput } from 'react-native-paper';
+import { auth } from '../../../firebase';
 import LabelBtn from '../../components/shared/LabelBtn/LabelBtn';
 import { COMPLETE_BTN_LABEL } from '../../constants';
 import { useAppTheme } from '../../hooks/useAppTheme';
@@ -46,6 +47,21 @@ const Registration = ({
       checkPassword();
     }
   }, [value]);
+
+  const register = () => {
+    auth
+      .createUserWithEmailAndPassword(value.email, value.password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ..
+      });
+  };
 
   return (
     <ScrollView

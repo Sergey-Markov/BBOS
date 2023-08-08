@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { userSelector } from '../redux/reducers/usersReducer';
 import { authSelector } from '../redux/reducers/authReducer';
 import { getAuthStatus } from '../redux/selectors/authSelectors/authSelectors';
+import React from 'react';
 
 const prefix = Linking.createURL('/');
 
@@ -65,7 +66,7 @@ const RootNavigation = () => {
       linking={linking as LinkingOptions<ParamListBase>}
       fallback={<Text>Loading...</Text>}
     >
-      {authStatus !== 'Authorized' ? (
+      {authStatus === 'Authorized' ? (
         <DrawerNavigator getHeaderTitle={getHeaderTitle} />
       ) : (
         <AuthNavigator />
