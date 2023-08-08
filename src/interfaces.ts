@@ -1,11 +1,10 @@
 import type { RouteProp } from '@react-navigation/native';
-import type {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
-import { ImageSourcePropType } from 'react-native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ImagePickerResult } from 'expo-image-picker';
 
 type TChildren = React.ReactNode;
+const timeStamp = new Date().getTime();
+type TCreate_at = typeof timeStamp;
 
 export type TRegistration = {
   email: string;
@@ -13,17 +12,18 @@ export type TRegistration = {
   confirmPassword: string;
 };
 export type TComment = {
-  id: string | number;
-  parentId: string | null;
+  id: string;
+  parentId: string;
   userName: string;
   userId: string;
   message: string;
-  create_at: number;
+  create_at: TCreate_at;
 };
 
 export type TAbout = {
   id: string;
-  count: string;
+  count: number;
+  name: string;
   icon: string;
   selectedIcon: string;
   selected: boolean;
@@ -42,12 +42,13 @@ export type TEventData = {
 };
 
 export type TPost = {
+  id: string;
   title: string;
   description: string;
   date: string;
-  image: string;
+  image: string | null;
   about: TAbout[];
-  comments: TComment[];
+  comments: TComment[] | [];
 };
 
 export type TPostData =

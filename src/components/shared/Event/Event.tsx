@@ -33,8 +33,8 @@ interface IEventProps {
 const Event = ({ data, isShort = false, inputRef }: IEventProps) => {
   const theme = useAppTheme();
   const { id, title, description, date, time, location, image, about } = data;
-  const normalizeDate = moment(`${date} ${time}`).format('LL HH:mm');
-  const dateLocationString = `${normalizeDate} ${location}`;
+  const normalizeDate = moment(new Date(date)).format('LL');
+  const dateLocationString = `${normalizeDate} ${time} ${location}`;
 
   const shareContent = async () => {
     try {

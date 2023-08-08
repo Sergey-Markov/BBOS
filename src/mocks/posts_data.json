@@ -35,7 +35,7 @@
       "comments": [
         {
           "id": "1",
-          "parentId": null,
+          "parentId": "",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
           "userId": 1,
@@ -43,7 +43,7 @@
         },
         {
           "id": "2",
-          "parentId": 1,
+          "parentId": "1",
           "userName": "Lera",
           "create_at": "2023-07-17T14:23:30.002Z",
           "userId": 2,
@@ -51,34 +51,34 @@
         },
         {
           "id": "3",
-          "parentId": 1,
+          "parentId": "1",
           "userName": "Andriy",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 3,
+          "userId": "3",
           "message": "daun"
         },
         {
           "id": "4",
-          "parentId": 5,
+          "parentId": "5",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "it is true"
         },
         {
           "id": "5",
-          "parentId": null,
+          "parentId": "",
           "userName": "Andriy",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 3,
+          "userId": "3",
           "message": "may be he is a daun"
         },
         {
           "id": "6",
-          "parentId": 5,
+          "parentId": "5",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "not shure"
         }
       ]
@@ -118,132 +118,49 @@
       "comments": [
         {
           "id": "1",
-          "parentId": null,
+          "parentId": "",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "loh lohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohloh lohlohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohlohloh lohloh lohlohlohlohloh lohlohloh loh lohlohlohloh lohlohloh"
         },
         {
           "id": "2",
-          "parentId": 1,
+          "parentId": "1",
           "userName": "Lera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 2,
+          "userId": "2",
           "message": "sam loh"
         },
         {
           "id": "3",
-          "parentId": 1,
+          "parentId": "1",
           "userName": "Andriy",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 3,
+          "userId": "3",
           "message": "daun"
         },
         {
           "id": "4",
-          "parentId": 5,
+          "parentId": "5",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "it is true"
         },
         {
           "id": "5",
-          "parentId": null,
+          "parentId": "",
           "userName": "Andriy",
           "create_at": "2023-07-17T14:23:30.002Z",
           "message": "may be he is a daun"
         },
         {
           "id": "6",
-          "parentId": 5,
+          "parentId": "5",
           "userName": "Valera",
           "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
-          "message": "not shure"
-        }
-      ]
-    },
-    {
-      "id": "3",
-      "title": "Jumping Event Jumping Event Jumping Event Jumping Event Jumping Event Jumping Event",
-      "description": "L, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.",
-      "date": "2023-07-14T07:45:05.839Z",
-      "image": "https://picsum.photos/id/387/1920/1080",
-      "about": [
-        {
-          "id": "1",
-          "name": "likes",
-          "count": 155,
-          "icon": "thumb-up-outline",
-          "selectedIcon": "thumb-up",
-          "selected": true
-        },
-        {
-          "id": "2",
-          "name": "dislikes",
-          "count": 40,
-          "icon": "thumb-down-outline",
-          "selectedIcon": "thumb-down",
-          "selected": false
-        },
-        {
-          "id": "3",
-          "name": "comments",
-          "count": 25,
-          "icon": "comment-text-outline",
-          "selectedIcon": "comment-text",
-          "selected": false
-        }
-      ],
-      "comments": [
-        {
-          "id": "1",
-          "parentId": null,
-          "userName": "Valera",
-          "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
-          "message": "loh lohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohloh lohlohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohlohloh lohloh lohlohlohlohloh lohlohloh loh lohlohlohloh lohlohloh"
-        },
-        {
-          "id": "2",
-          "parentId": 1,
-          "userName": "Lera",
-          "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 2,
-          "message": "sam loh"
-        },
-        {
-          "id": "3",
-          "parentId": 1,
-          "userName": "Andriy",
-          "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 3,
-          "message": "daun"
-        },
-        {
-          "id": "4",
-          "parentId": 5,
-          "userName": "Valera",
-          "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
-          "message": "it is true"
-        },
-        {
-          "id": "5",
-          "parentId": null,
-          "userName": "Andriy",
-          "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 3,
-          "message": "may be he is a daun"
-        },
-        {
-          "id": "6",
-          "parentId": 5,
-          "userName": "Valera",
-          "create_at": "2023-07-17T14:23:30.002Z",
-          "userId": 1,
+          "userId": "1",
           "message": "not shure"
         }
       ]

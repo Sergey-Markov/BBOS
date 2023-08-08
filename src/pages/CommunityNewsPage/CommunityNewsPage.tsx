@@ -17,7 +17,6 @@ const CommunityNewsPage = ({
   const { id, title, urlToImage, publishedAt, description, link } =
     communityNewsData;
   const currentDate = moment(publishedAt).format('LL');
-
   return (
     <ScrollView style={s(theme).container}>
       <View key={id}>

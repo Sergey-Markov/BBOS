@@ -2,19 +2,19 @@ import React, { RefAttributes, useCallback } from 'react';
 import { TextInput, View } from 'react-native';
 import { Avatar, Text, TextInputProps } from 'react-native-paper';
 import moment from 'moment';
-import { TComment, TPost } from '../../../interfaces';
+import { TComment, TEventData, TPost } from '../../../interfaces';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import {
   COMMENT_BTN_LABEL,
   COMMENTS_STR,
   NO_COMMENT_STR,
 } from '../../../constants';
-
-import s from './Comments.styles';
 import LabelBtn from '../LabelBtn/LabelBtn';
 
+import s from './Comments.styles';
+
 interface ICommentsProps {
-  data: TPost;
+  data: TPost | TEventData;
   inputRef: React.RefObject<TextInput & RefAttributes<TextInputProps>>;
   addComment: React.Dispatch<React.SetStateAction<TComment>>;
 }
@@ -41,8 +41,9 @@ const Comments = ({ data, inputRef, addComment }: ICommentsProps) => {
           const userNameAvatar = comment.userName.slice(0, 1);
           const dateNormalize = moment(comment.create_at).format('LL HH:mm');
           const commentsFilteredByParentId = array.filter(({ parentId }) => {
-            return parentId === comment.id;
+            return parentId == comment.id;
           });
+          // console.log('commentsFilteredByParentId', commentsFilteredByParentId);
 
           return (
             <View key={comment.id}>

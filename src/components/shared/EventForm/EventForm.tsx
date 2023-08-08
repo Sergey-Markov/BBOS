@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { View, SafeAreaView } from 'react-native';
+import { View, SafeAreaView, Alert } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { IconButton, Text } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -23,6 +23,10 @@ import {
 } from '../../../constants';
 
 import s from './EventForm.styles';
+import { ABOUT_MOCK } from '../../../mocks/default_data_mock';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { addEventPost } from '../../../redux/reducers/eventsReducer';
 
 registerTranslation('ru', {
   save: 'Зберегти',
@@ -43,7 +47,17 @@ registerTranslation('ru', {
   close: 'Close',
 });
 
-const initialValues = {
+type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
+type TInitialValues = {
+  title: string;
+  description: string;
+  date: Date;
+  time: { hours: number; minutes: number };
+  location: string;
+  image: null | ImagePickerResult;
+};
+
+const initialValues: TInitialValues = {
   title: '',
   description: '',
   date: new Date(),
@@ -55,12 +69,10 @@ const initialValues = {
 const startYearFor = initialValues.date.getFullYear();
 const endYearFor = startYearFor + 5;
 
-type TInitialValues = typeof initialValues;
 type TValues = keyof TInitialValues;
 type TDateParam = {
   date: Date;
 };
-type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
 interface INewsForm {
   scrollRef: React.RefObject<KeyboardAwareScrollView>;
 }
@@ -87,6 +99,8 @@ const EventForm = ({ scrollRef }: INewsForm) => {
   const [isShowCalendar, setIsShowCalendar] = useState(false);
   const [isShowTimePicker, setIsShowTimePicker] = useState(false);
   const theme = useAppTheme();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const toggleCalendarShow = useCallback(() => {
     setIsShowCalendar((prev) => !prev);
@@ -95,12 +109,36 @@ const EventForm = ({ scrollRef }: INewsForm) => {
   const toggleTimeShow = useCallback(() => {
     setIsShowTimePicker((prev) => !prev);
   }, []);
+  const strDate = new Date().toJSON();
 
   return (
     <SafeAreaView style={s.container}>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          if (
+            values.image === null ||
+            values.title.length <= 0 ||
+            values.description.length <= 0
+          ) {
+            Alert.alert('Add fields information');
+            return;
+          }
+          if (values.image.assets) {
+            const imgString = values.image.assets[0].uri;
+            const newEventPost = {
+              ...values,
+              date: strDate,
+              time: `${values.time.hours}:${values.time.minutes}`,
+              about: ABOUT_MOCK,
+              comments: [],
+              image: imgString,
+              id: (Math.random() * 1000).toFixed(0).toString(),
+            };
+            dispatch(addEventPost(newEventPost));
+            navigation.goBack();
+          }
+        }}
       >
         {({
           handleChange,

@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { Alert, SafeAreaView, View } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
 import ImgPicker from '../ImgPicker/ImgPicker';
@@ -10,10 +12,12 @@ import {
   SUBMIT_BTN_LABEL,
 } from '../../../constants';
 import LabelBtn from '../LabelBtn/LabelBtn';
-
-import s from './PostForm.styles';
 import InputCustom from '../InputCustom/InputCustom';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { addPost } from '../../../redux/reducers/postsReducers';
+
+import s from './PostForm.styles';
+import { ABOUT_MOCK } from '../../../mocks/default_data_mock';
 
 const INPUTS_ARR = [
   {
@@ -27,30 +31,58 @@ const INPUTS_ARR = [
     name: 'description',
   },
 ];
+type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
+type TInitialValues = {
+  title: string;
+  description: string;
+  image: null | ImagePickerResult;
+};
 
-const initialValues = {
+const initialValues: TInitialValues = {
   title: '',
   description: '',
-  date: new Date(),
-  time: { hours: 23, minutes: 30 },
-  location: '',
   image: null,
 };
 
-type TInitialValues = typeof initialValues;
 type TValues = keyof TInitialValues;
-type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
 
 interface IPostForm {
   scrollRef: React.RefObject<KeyboardAwareScrollView>;
 }
 
 const PostForm = ({ scrollRef }: IPostForm) => {
+  const navigation = useNavigation();
+
+  const dispatch = useDispatch();
+  const strDate = new Date().toJSON();
+
   return (
     <SafeAreaView style={s.container}>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          if (
+            values.image === null ||
+            values.title.length <= 0 ||
+            values.description.length <= 0
+          ) {
+            Alert.alert('Add fields information');
+            return;
+          }
+          if (values.image.assets) {
+            const imgString = values.image.assets[0].uri;
+            const newPost = {
+              ...values,
+              date: strDate,
+              about: ABOUT_MOCK,
+              comments: [],
+              image: imgString,
+              id: (Math.random() * 1000).toFixed(0).toString(),
+            };
+            dispatch(addPost(newPost));
+            navigation.goBack();
+          }
+        }}
       >
         {({
           handleChange,
@@ -94,7 +126,9 @@ const PostForm = ({ scrollRef }: IPostForm) => {
               <View style={s.btnWrapper}>
                 <LabelBtn
                   mode="contained"
-                  onPress={handleSubmit}
+                  onPress={(e: string) => {
+                    handleSubmit(e);
+                  }}
                   label={SUBMIT_BTN_LABEL}
                 />
               </View>

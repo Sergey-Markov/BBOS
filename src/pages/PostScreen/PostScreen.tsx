@@ -5,19 +5,32 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Comments from '../../components/shared/Comments/Comments';
 import CommentsInput from '../../components/shared/CommentsInput/CommentsInput';
 import Post from '../../components/shared/Post/Post';
-import { TComment, TPost, TPostData } from '../../interfaces';
+import { IScreenProps, TComment, TPost } from '../../interfaces';
+import { useDispatch } from 'react-redux';
+import {
+  addPostComment,
+  postsSelector,
+} from '../../redux/reducers/postsReducers';
+import { useSelector } from 'react-redux';
 
-const PostScreen = ({ navigation, route }: any) => {
+const PostScreen = ({ navigation, route }: IScreenProps<'PostScreen'>) => {
   if (!route.params) {
     return null;
   }
+  const dispatch = useDispatch();
+  const allPost = useSelector(postsSelector);
   const { data, isInputAutoFocused } = route.params;
   const [text, setText] = useState('');
-  const [postData, setPostData] = useState<TPost | TPostData>(data);
+
+  const currentPost = allPost.find((item) => item.id === data?.id);
+
+  if (!currentPost) {
+    return null;
+  }
 
   const [selfComment, setSelfComment] = useState<TComment>({
-    id: 0,
-    parentId: null,
+    id: '0',
+    parentId: '',
     userName: 'Serhiy',
     userId: '777',
     message: '',
@@ -39,20 +52,18 @@ const PostScreen = ({ navigation, route }: any) => {
     const newComment = {
       ...selfComment,
       message: text,
-      id: (Math.random() * 1000).toFixed(0),
+      id: (Math.random() * 1000).toFixed(0).toString(),
     };
 
-    setPostData((prev) => {
-      if (prev) {
-        return {
-          ...prev,
-          comments: [...prev.comments, newComment],
-        };
-      }
-    });
-
+    if (currentPost) {
+      const updatePost = {
+        ...currentPost,
+        comments: [...currentPost.comments, newComment],
+      };
+      dispatch(addPostComment(updatePost as TPost));
+    }
     setSelfComment((prev) => {
-      return { ...prev, parentId: null, message: '' };
+      return { ...prev, parentId: '', message: '' };
     });
   };
 
@@ -67,9 +78,9 @@ const PostScreen = ({ navigation, route }: any) => {
       extraHeight={120}
       ref={scrollViewRef}
     >
-      <Post data={postData} isShort={false} inputRef={inputCommentRef} />
+      <Post data={data} isShort={false} inputRef={inputCommentRef} />
       <Comments
-        data={postData as TPost}
+        data={currentPost as any}
         inputRef={inputCommentRef}
         addComment={setSelfComment}
       />
