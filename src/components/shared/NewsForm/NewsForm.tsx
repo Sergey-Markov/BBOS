@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { SafeAreaView } from 'react-native';
+import { Alert, SafeAreaView } from 'react-native';
 import { Formik, FormikValues } from 'formik';
 import { ScrollView } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -15,6 +15,9 @@ import LabelBtn from '../LabelBtn/LabelBtn';
 import InputCustom from '../InputCustom/InputCustom';
 
 import s from './NewsForm.styles';
+import { useDispatch } from 'react-redux';
+import { addNews } from '../../../redux/reducers/newsReducer';
+import { useNavigation } from '@react-navigation/native';
 
 const INPUTS_ARR = [
   {
@@ -29,34 +32,62 @@ const INPUTS_ARR = [
   },
 ];
 
-const initialValues = {
+type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
+
+type TInitialValues = {
+  title: string;
+  description: string;
+  urlToImage: ImagePickerResult | null;
+  link: string;
+};
+
+const initialValues: TInitialValues = {
   title: '',
   description: '',
-  date: new Date(),
-  image: null,
+  urlToImage: null,
   link: '',
 };
 
-type TInitialValues = typeof initialValues;
 type TValues = keyof TInitialValues;
 
-type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
 interface INewsForm {
   scrollRef: React.RefObject<KeyboardAwareScrollView>;
 }
 
 const NewsForm = ({ scrollRef }: INewsForm) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const modalToggler = useCallback(() => {
     setIsModalVisible((prev) => !prev);
   }, []);
+  const strDate = new Date().toJSON();
 
   return (
     <SafeAreaView style={s.container}>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          if (
+            values.urlToImage === null ||
+            values.title.length <= 0 ||
+            values.description.length <= 0
+          ) {
+            Alert.alert('Add fields information');
+            return;
+          }
+          if (values.urlToImage.assets) {
+            const imgString = values.urlToImage.assets[0].uri;
+            const newNewsPost = {
+              ...values,
+              date: strDate,
+              urlToImage: imgString,
+              id: (Math.random() * 1000).toFixed(0).toString(),
+            };
+            dispatch(addNews(newNewsPost));
+            navigation.goBack();
+          }
+        }}
       >
         {({
           handleChange,
@@ -71,7 +102,7 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
 
           const handleImgChange = useCallback(
             (data: ImagePickerResult) => {
-              setFieldValue('image', data);
+              setFieldValue('urlToImage', data);
             },
             [setFieldValue]
           );
@@ -79,9 +110,9 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
           return (
             <ScrollView contentContainerStyle={s.formikContainer}>
               <ImgPicker
-                data={values.image}
+                data={values.urlToImage}
                 onChange={handleImgChange}
-                onReset={() => resetFieldHandler('image')}
+                onReset={() => resetFieldHandler('urlToImage')}
               />
               {INPUTS_ARR.map(({ id, label, name }) => {
                 return (

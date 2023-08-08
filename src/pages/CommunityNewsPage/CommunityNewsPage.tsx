@@ -7,20 +7,16 @@ import { useAppTheme } from '../../hooks/useAppTheme';
 import { IScreenProps } from '../../interfaces';
 
 import s from './CommunityNewsPage.styles';
-import { newsSelector } from '../../redux/reducers/newsReducer';
-import { useSelector } from 'react-redux';
 
 const CommunityNewsPage = ({
   navigation,
   route,
 }: IScreenProps<'CommunityNewsPage'>) => {
-  const allNews = useSelector(newsSelector);
   const theme = useAppTheme();
   const { communityNewsData } = route.params;
   const { id, title, urlToImage, publishedAt, description, link } =
     communityNewsData;
   const currentDate = moment(publishedAt).format('LL');
-
   return (
     <ScrollView style={s(theme).container}>
       <View key={id}>
