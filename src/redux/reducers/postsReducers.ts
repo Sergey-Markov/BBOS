@@ -1,10 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TPost, TPostData } from '../../interfaces';
 import { RootState } from '../store';
 import POSTS from '../../mocks/posts_data.json';
 
 const initialState = POSTS.data;
-export type TPosts = typeof initialState;
 
 export const postsSlice = createSlice({
   name: 'posts',

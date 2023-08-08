@@ -8,13 +8,14 @@ import Event from '../../components/shared/Event/Event';
 import { EVENTS_DATA } from '../../mocks/eventsMock';
 import Advertising from '../../components/shared/Advertising/Advertising';
 import CommunityNewsList from '../../components/shared/CommunityNewsList/CommunityNewsList';
-import { COMMUNITY_NEWS_DATA } from '../../mocks/communityNewsMock';
-
 import { useFocusEffect } from '@react-navigation/native';
 import FormsBtn from '../../components/shared/FormsBtn/FormsBtn';
+import { useSelector } from 'react-redux';
+import { newsSelector } from '../../redux/reducers/newsReducer';
 
 const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
   const [isFormBtn, setFormBtn] = useState<boolean>(false);
+  const allNews = useSelector(newsSelector);
   useFocusEffect(
     useCallback(() => {
       if (!isFormBtn) {
@@ -23,12 +24,13 @@ const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
       return () => setFormBtn(false);
     }, [])
   );
+
   const goToSelectedEvent = (id: string) => {
     navigation.navigate('EventPage', { id });
   };
 
   const goToSelectedCommunityNews = (id: string) => {
-    const data = COMMUNITY_NEWS_DATA.find((item) => {
+    const data = allNews.find((item) => {
       const result = String(item.id) === String(id);
       return result;
     });
@@ -52,10 +54,7 @@ const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
       <Text variant="titleMedium" style={{ marginVertical: 5 }}>
         Community news:
       </Text>
-      <CommunityNewsList
-        data={COMMUNITY_NEWS_DATA}
-        onSelect={goToSelectedCommunityNews}
-      />
+      <CommunityNewsList data={allNews} onSelect={goToSelectedCommunityNews} />
       {isFormBtn && <FormsBtn />}
     </ScrollView>
   );

@@ -5,12 +5,12 @@ import { useFocusEffect } from '@react-navigation/native';
 import Post from '../../components/shared/Post/Post';
 import AddPostBtn from '../../components/shared/AddPostBtn/AddPostBtn';
 import { useSelector } from 'react-redux';
-import { getPosts } from '../../redux/selectors/postsSelectors/postsSelectors';
+import { postsSelector } from '../../redux/reducers/postsReducers';
 
 import s from './Posts.styles';
 
 const Posts = ({ navigation, route }: IScreenProps<'Posts'>) => {
-  const posts = useSelector(getPosts);
+  const posts = useSelector(postsSelector);
   const [isFormBtn, setFormBtn] = useState<boolean>(false);
 
   useFocusEffect(
