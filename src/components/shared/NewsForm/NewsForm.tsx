@@ -61,7 +61,7 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
   const modalToggler = useCallback(() => {
     setIsModalVisible((prev) => !prev);
   }, []);
-  const strDate = new Date().toJSON();
+  const strDate = new Date();
 
   return (
     <SafeAreaView style={s.container}>
@@ -80,7 +80,7 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
             const imgString = values.urlToImage.assets[0].uri;
             const newNewsPost = {
               ...values,
-              date: strDate,
+              publishedAt: Number(strDate),
               urlToImage: imgString,
               id: (Math.random() * 1000).toFixed(0).toString(),
             };

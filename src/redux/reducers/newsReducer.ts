@@ -9,16 +9,9 @@ export const newsSlice = createSlice({
   name: 'news',
   initialState,
   reducers: {
-    addNews: (state, action: PayloadAction<any>) => {
+    addNews: (state, action: PayloadAction<TNewsPost>) => {
       state.push(action.payload);
     },
-    // addPostComment: (state, action: PayloadAction<any>) => {
-    //   const currentPost = state.find((item) => item.id === action.payload.id);
-    //   if (currentPost) {
-    //     const indexCurrentPost = state.indexOf(currentPost);
-    //     state.splice(indexCurrentPost, 1, action.payload);
-    //   }
-    // },
   },
 });
 
