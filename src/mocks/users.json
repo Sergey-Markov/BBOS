@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "displayName": "Serhiy",
+      "email": "1nativefl@gmail.com",
+      "phoneNumber": "+380982703627",
+      "photoURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgYpOOYgMxD_FO9y7jYv2F_DwMnnVMBj8rWQ&usqp=CAU",
+      "uid": "dBvcjeAsHWbpJ4wri4DT1sbPmNn2"
+    },
+    {
+      "displayName": "Alex",
+      "email": "test@gmail.com",
+      "phoneNumber": "+380980000001",
+      "photoURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgYpOOYgMxD_FO9y7jYv2F_DwMnnVMBj8rWQ&usqp=CAU",
+      "uid": "dBvcjeAsHWbpJ4wri4DT1sbPmNn"
+    }
+  ]
+}
