@@ -1,0 +1,651 @@
+{
+  "commercial_services": [
+    {
+      "iconMaterialCommunityIcons": "television-classic",
+      "jobTitle": "Ремонт техніки",
+      "workers": [
+        {
+          "description": "Ремонт телевізорів",
+          "name": "Василь",
+          "tel": [
+            "0671234567"
+          ]
+        },
+        {
+          "description": "Ремонт телевізорів, пральних машин, холодильників, мікрохвильових печей, пилососів, електрочайників, електроплит, електрообігрівачів, електрофенив, електроутюгів, електробритв, електрофритюрниць",
+          "name": "GlobalRepair",
+          "tel": [
+            "0671234568"
+          ]
+        },
+        {
+          "description": "Ремонт телевізорів, пральних машин, холодильників, мікрохвильових печей",
+          "name": "Master Service",
+          "tel": [
+            "0671234567"
+          ]
+        }
+      ]
+    },
+    {
+      "iconMaterialCommunityIcons": "shower",
+      "jobTitle": "Ремонт сантехніки",
+      "workers": [
+        {
+          "description": "Діагностика проблеми, зупинка подачі води, розбірка та заміна пошкоджених компонентів, перевірка герметичності та функціонування.",
+          "name": "Василь",
+          "tel": [
+            "0671234567"
+          ]
+        },
+        {
+          "description": "Діагностика проблеми, зупинка подачі води, розбірка та заміна пошкоджених компонентів, перевірка герметичності та функціонування, запуск системи - Це включає в себе ремонт, заміну або підтримку різних компонентів сантехнічних систем, таких як труби, кранівники, сифони, насоси, бойлери, радіатори тощо.",
+          "name": "GlobalRepair",
+          "tel": [
+            "0671234568"
+          ]
+        },
+        {
+          "description": "заміну або підтримку різних компонентів сантехнічних систем, таких як труби, кранівники, сифони, насоси, бойлери, радіатори тощо.",
+          "name": "Plumbing Service",
+          "tel": [
+            "0671234567"
+          ]
+        }
+      ]
+    },
+    {
+      "iconMaterialCommunityIcons": "dog-service",
+      "jobTitle": "Догляд тварин",
+      "workers": [
+        {
+          "description": "Годування, прогулянки, туалетні потреби, грумінг, медична допомога, готель для тварин",
+          "name": "Леся",
+          "tel": [
+            "0671234567"
+          ]
+        },
+        {
+          "description": "Годування, прогулянки, туалетні потреби, грумінг, медична допомога, готель для тварин",
+          "name": "Pets Service",
+          "tel": [
+            "0671234568"
+          ]
+        },
+        {
+          "description": "Годування, прогулянки, туалетні потреби, грумінг, медична допомога, готель для тварин",
+          "name": "Лабрадор сервіс",
+          "tel": [
+            "0671234567"
+          ]
+        }
+      ]
+    },
+    {
+      "iconMaterialCommunityIcons": "broom",
+      "jobTitle": "Прибирання",
+      "workers": [
+        {
+          "description": "Прибирання квартир, будинків, офісів, мийка вікон, прання килимів, хімчистка меблів, хімчистка автомобілів, прибирання після ремонту, прибирання територій",
+          "name": "Петро",
+          "tel": [
+            "0671234567"
+          ]
+        },
+        {
+          "description": "Прибирання квартир, будинків, офісів, мийка вікон, прання килимів, хімчистка меблів, хімчистка автомобілів, прибирання після ремонту, прибирання територій",
+          "name": "CleaningService",
+          "tel": [
+            "0671234568"
+          ]
+        },
+        {
+          "description": "Прибирання квартир, будинків, офісів, мийка вікон, прання килимів, хімчистка меблів, хімчистка автомобілів, прибирання після ремонту, прибирання територій",
+          "name": "Чисто в хаті",
+          "tel": [
+            "0671234567"
+          ]
+        }
+      ]
+    },
+    {
+      "iconMaterialCommunityIcons": "chef-hat",
+      "jobTitle": "Приготування",
+      "workers": [
+        {
+          "description": "Планування меню, Покупка продуктів, Приготування страв, Кулінарне консультування, Адаптація до дієт,  Збереження продуктів, Прибирання кухні",
+          "name": "Петрович",
+          "tel": [
+            "0671234567"
+          ]
+        },
+        {
+          "description": "Планування меню, Покупка продуктів, Приготування страв, Кулінарне консультування, Адаптація до дієт,  Збереження продуктів, Прибирання кухні",
+          "name": "CookingService",
+          "tel": [
+            "0671234568"
+          ]
+        },
+        {
+          "description": "Планування меню, Покупка продуктів, Приготування страв, Кулінарне консультування, Адаптація до дієт,  Збереження продуктів, Прибирання кухні",
+          "name": "Смакота",
+          "tel": [
+            "0671234567"
+          ]
+        }
+      ]
+    }
+  ],
+  "commonServices": [
+    {
+      "address": "м.Черкаси,вул. М.Залізняка, 142, 18000",
+      "name": "Черкасигаз",
+      "tel": [
+        "0472327900"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Сагайдачного, 12, 18000",
+      "name": "Черкасиводоканал",
+      "tel": [
+        "0472373300"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Чайковського, 117, 18000",
+      "name": "Черкаська служба чистоти",
+      "tel": [
+        "0472643455",
+        "0472643266",
+        "0633633063"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Остафія Дашкевича, 64, 18000",
+      "name": "Черкаситеплокоммуненерго",
+      "tel": [
+        "0472657078",
+        "0472655801"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Смілянськая, 132/1, 18000",
+      "name": "КП 'Дирекція парків'",
+      "tel": [
+        "0472632534"
+      ]
+    },
+    {
+      "address": "м.Черкаси,бул. Шевченко, 345, 18000",
+      "name": "Служба утримання будинків 'Митниця'",
+      "tel": [
+        "0472739700"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Надпільна, 330/5, 18000",
+      "name": "Служба утримання будинків Придніпровського р-на",
+      "tel": [
+        "0472452262"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Гайдара, 3/2, 18000",
+      "name": "Служба утримання будинків Соснівського р-на",
+      "tel": [
+        "0472661768"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Хіміків, 76, 18000",
+      "name": "ТЕЦ",
+      "tel": [
+        "0472647720"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Благовісна, 166, 18000",
+      "name": "Черкаські магістральні електромережі",
+      "tel": [
+        "0472372549"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Бидгощська, 13, 18000",
+      "name": "КП 'ЧЕЛУАШ'",
+      "tel": [
+        "0472647030",
+        "0472643488"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Сагайдачного, 12/1, 18000",
+      "name": "Черкасиліфт",
+      "tel": [
+        "0472638509",
+        "0472638602",
+        "0472541041"
+      ]
+    },
+    {
+      "address": "м.Черкаси,вул. Байды Вишневецького, 36, 18000",
+      "name": "Департамент ЖКГ",
+      "tel": [
+        "0472361139"
+      ]
+    }
+  ],
+  "community_data": {
+    "address": "м.Черкаси, вул.Гагаріна б.39",
+    "admins": [
+      "201",
+      "202"
+    ],
+    "gatePhoneNumber": [
+      "0981221111"
+    ],
+    "id": 1,
+    "name": "ЖК 'Митниця'",
+    "phoneNumbers": [
+      "0933548272",
+      "0502532525"
+    ]
+  },
+  "foodServices": [
+    {
+      "address": "м.Черкаси,вул. Гагаріна, 142, 18000",
+      "name": "ХОЧУ ПІЦУ",
+      "tel": [
+        "0505500057"
+      ],
+      "url": "https://www.instagram.com/hochu_pizza_/"
+    },
+    {
+      "address": "м.Черкаси,вул. Пальохи, 25, 18000",
+      "name": "FOREST",
+      "tel": [
+        "0680493721",
+        "0631435785"
+      ],
+      "url": "https://forest.choiceqr.com/menu/section:menyu/salati"
+    },
+    {
+      "address": "м.Черкаси,бул. Шевченко, 187, 18000",
+      "name": "Stumari",
+      "tel": [
+        "0672431680",
+        "0472590100"
+      ],
+      "url": "https://stumarirest.taplink.ws/"
+    },
+    {
+      "address": "м.Черкаси,вул. Гагаріна, 110, 18000",
+      "name": "РУШНИЧОК",
+      "tel": [
+        "0687848844"
+      ],
+      "url": "https://www.instagram.com/rushnuchok/"
+    },
+    {
+      "address": "м.Черкаси,вул. Гагаріна, 142, 18000",
+      "name": "Шашлична 'М'ясо'",
+      "tel": [
+        "0673189597"
+      ],
+      "url": "https://shashlichnamyaso.choiceqr.com/"
+    },
+    {
+      "address": "м.Черкаси,вул. Небесної Сотні, 5, 18000",
+      "name": "Pitbull",
+      "tel": [
+        "0635047261"
+      ],
+      "url": "https://pitbullcitycafe.choiceqr.com/"
+    }
+  ],
+  "posts": [
+    {
+      "about": [
+        {
+          "count": 155,
+          "icon": "thumb-up-outline",
+          "id": "1",
+          "name": "likes",
+          "selected": true,
+          "selectedIcon": "thumb-up"
+        },
+        {
+          "count": 40,
+          "icon": "thumb-down-outline",
+          "id": "2",
+          "name": "dislikes",
+          "selected": false,
+          "selectedIcon": "thumb-down"
+        },
+        {
+          "count": 25,
+          "icon": "comment-text-outline",
+          "id": "3",
+          "name": "comments",
+          "selected": false,
+          "selectedIcon": "comment-text"
+        }
+      ],
+      "comments": [
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "1",
+          "message": "loh lohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohloh lohlohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohlohloh lohloh lohlohlohlohloh lohlohloh loh lohlohlohloh lohlohloh",
+          "userId": 1,
+          "userName": "Valera"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "2",
+          "message": "sam loh",
+          "parentId": 1,
+          "userId": 2,
+          "userName": "Lera"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "3",
+          "message": "daun",
+          "parentId": 1,
+          "userId": 3,
+          "userName": "Andriy"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "4",
+          "message": "it is true",
+          "parentId": 5,
+          "userId": 1,
+          "userName": "Valera"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "5",
+          "message": "may be he is a daun",
+          "userId": 3,
+          "userName": "Andriy"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "6",
+          "message": "not shure",
+          "parentId": 5,
+          "userId": 1,
+          "userName": "Valera"
+        }
+      ],
+      "date": "2023-07-14T07:45:05.839Z",
+      "description": "L, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.",
+      "id": "1",
+      "image": "https://picsum.photos/id/377/1920/1080",
+      "title": "Jumping at evening"
+    },
+    {
+      "about": [
+        {
+          "count": 155,
+          "icon": "thumb-up-outline",
+          "id": "1",
+          "name": "likes",
+          "selected": true,
+          "selectedIcon": "thumb-up"
+        },
+        {
+          "count": 40,
+          "icon": "thumb-down-outline",
+          "id": "2",
+          "name": "dislikes",
+          "selected": false,
+          "selectedIcon": "thumb-down"
+        },
+        {
+          "count": 25,
+          "icon": "comment-text-outline",
+          "id": "3",
+          "name": "comments",
+          "selected": false,
+          "selectedIcon": "comment-text"
+        }
+      ],
+      "comments": [
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "1",
+          "message": "loh lohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohloh lohlohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohlohloh lohloh lohlohlohlohloh lohlohloh loh lohlohlohloh lohlohloh",
+          "userId": 1,
+          "userName": "Valera"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "2",
+          "message": "sam loh",
+          "parentId": 1,
+          "userId": 2,
+          "userName": "Lera"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "3",
+          "message": "daun",
+          "parentId": 1,
+          "userId": 3,
+          "userName": "Andriy"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "4",
+          "message": "it is true",
+          "parentId": 5,
+          "userId": 1,
+          "userName": "Valera"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "5",
+          "message": "may be he is a daun",
+          "userName": "Andriy"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "6",
+          "message": "not shure",
+          "parentId": 5,
+          "userId": 1,
+          "userName": "Valera"
+        }
+      ],
+      "date": "2023-07-14T07:45:05.839Z",
+      "description": "L, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.",
+      "id": "2",
+      "image": "https://picsum.photos/id/390/1920/1080",
+      "title": "Code chill"
+    },
+    {
+      "about": [
+        {
+          "count": 155,
+          "icon": "thumb-up-outline",
+          "id": "1",
+          "name": "likes",
+          "selected": true,
+          "selectedIcon": "thumb-up"
+        },
+        {
+          "count": 40,
+          "icon": "thumb-down-outline",
+          "id": "2",
+          "name": "dislikes",
+          "selected": false,
+          "selectedIcon": "thumb-down"
+        },
+        {
+          "count": 25,
+          "icon": "comment-text-outline",
+          "id": "3",
+          "name": "comments",
+          "selected": false,
+          "selectedIcon": "comment-text"
+        }
+      ],
+      "comments": [
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "1",
+          "message": "loh lohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohloh lohlohlohlohlohlohlohloh lohlohlohloh lohlohlohlohlohlohloh lohloh lohlohlohlohloh lohlohloh loh lohlohlohloh lohlohloh",
+          "userId": 1,
+          "userName": "Valera"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "2",
+          "message": "sam loh",
+          "parentId": 1,
+          "userId": 2,
+          "userName": "Lera"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "3",
+          "message": "daun",
+          "parentId": 1,
+          "userId": 3,
+          "userName": "Andriy"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "4",
+          "message": "it is true",
+          "parentId": 5,
+          "userId": 1,
+          "userName": "Valera"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "5",
+          "message": "may be he is a daun",
+          "userId": 3,
+          "userName": "Andriy"
+        },
+        {
+          "create_at": "2023-07-17T14:23:30.002Z",
+          "id": "6",
+          "message": "not shure",
+          "parentId": 5,
+          "userId": 1,
+          "userName": "Valera"
+        }
+      ],
+      "date": "2023-07-14T07:45:05.839Z",
+      "description": "L, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices, Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices. Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices,  Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices Nulla convallis libero eget nisl ultrices, eget ultrices nisl ultrices.",
+      "id": "3",
+      "image": "https://picsum.photos/id/387/1920/1080",
+      "title": "Jumping Event Jumping Event Jumping Event Jumping Event Jumping Event Jumping Event"
+    }
+  ],
+  "taxi": [
+    {
+      "name": "CabLook Taxi",
+      "tel": [
+        "0932225665"
+      ],
+      "url": "https://cablook.taxi"
+    },
+    {
+      "name": "Таксі Smile",
+      "tel": [
+        "0931700777"
+      ],
+      "url": "https://www.instagram.com/taxismile_che/"
+    },
+    {
+      "name": "Таксі Студент",
+      "tel": [
+        "0674708484"
+      ],
+      "url": "https://studenttaxi.com.ua/"
+    },
+    {
+      "name": "Грузове таксі",
+      "tel": [
+        "0674708484"
+      ],
+      "url": "https://studenttaxi.com.ua/"
+    },
+    {
+      "name": "Авалон",
+      "tel": [
+        "0930021312"
+      ],
+      "url": "https://studenttaxi.com.ua/"
+    },
+    {
+      "name": "Інклюзивний перевізник",
+      "tel": [
+        "0987962411"
+      ],
+      "url": "https://zabota-lyubimykh.com.ua/"
+    }
+  ],
+  "telephone_directory_data": [
+    {
+      "name": "John Doe",
+      "official_position": "Голова ОСББ",
+      "tel": [
+        "0981111111",
+        "0987654324"
+      ]
+    },
+    {
+      "name": "Barbara Week",
+      "official_position": "Заступник голови ОСББ",
+      "photo": "https://www.w3schools.com/howto/img_avatar.png",
+      "tel": [
+        "0981111111",
+        "0987654320"
+      ]
+    },
+    {
+      "name": "Jane Doe",
+      "official_position": "бухгалтер",
+      "photo": "https://www.w3schools.com/howto/img_avatar.png",
+      "tel": [
+        "0987654320"
+      ]
+    },
+    {
+      "name": "Kate Doe",
+      "official_position": "прибиральник",
+      "tel": [
+        "0987654321"
+      ]
+    },
+    {
+      "name": "John Doe",
+      "official_position": "охоронець",
+      "photo": "https://www.w3schools.com/howto/img_avatar.png",
+      "tel": [
+        "0987654322"
+      ]
+    },
+    {
+      "name": "Alan Doe",
+      "official_position": "охоронець",
+      "photo": "https://www.w3schools.com/howto/img_avatar.png",
+      "tel": [
+        "0987654323"
+      ]
+    },
+    {
+      "name": "Peter Doe",
+      "official_position": "охоронець",
+      "tel": [
+        "0987654324"
+      ]
+    }
+  ]
+}

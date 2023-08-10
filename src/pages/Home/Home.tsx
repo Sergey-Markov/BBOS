@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Pressable } from 'react-native';
 import { IScreenProps } from '../../interfaces';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -15,6 +15,7 @@ import { eventsSelector } from '../../redux/reducers/eventsReducer';
 import { COMMUNITY_EVENTS_STR, COMMUNITY_NEWS_STR } from '../../constants';
 
 import s from './Home.styles';
+import { getValueFromSecureStore } from '../Login/Login';
 
 const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
   const [isFormBtn, setFormBtn] = useState<boolean>(false);
@@ -26,6 +27,14 @@ const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
       if (!isFormBtn) {
         setFormBtn(true);
       }
+      (async () => {
+        try {
+          const value = await getValueFromSecureStore('email');
+          console.log('value', value);
+        } catch (error) {
+          console.log('error');
+        }
+      })();
       return () => setFormBtn(false);
     }, [])
   );

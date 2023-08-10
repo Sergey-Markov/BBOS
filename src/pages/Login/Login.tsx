@@ -1,3 +1,4 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import {
   Pressable,
@@ -7,6 +8,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 import { TextInput, Checkbox } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
@@ -28,6 +30,14 @@ import {
 
 import s from './Login.styles';
 
+const store = async () => {
+  const isChecked = await getValueFromSecureStore('checked');
+  const storeEmail = await getValueFromSecureStore('email');
+  const storePassword = await getValueFromSecureStore('password');
+
+  return { isChecked, storeEmail, storePassword };
+};
+
 const SECONDARY_BTNS = [
   {
     title: 'log in with facebook',
@@ -43,31 +53,117 @@ const SECONDARY_BTNS = [
   },
 ];
 
+const saveToSecureStore = async (key: string, value: string) => {
+  await SecureStore.setItemAsync(key, value);
+};
+const deleteFromSecureStore = async (key: string) => {
+  await SecureStore.deleteItemAsync(key);
+};
+
+export const getValueFromSecureStore = async (key: string) => {
+  let result = await SecureStore.getItemAsync(key);
+  if (result) {
+    return result;
+  } else {
+    // alert('No values stored under that key.');
+    return '';
+  }
+};
+
 const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
   const [checked, setChecked] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+
   const [isSecured, setIsSecured] = useState(true);
   const theme = useAppTheme();
   const dispatch = useDispatch();
   const authStatus = useSelector(authSelector);
+
   const togglePasswordVisibility = () => {
     setIsSecured(!isSecured);
   };
+
+  const checkHandler = async () => {
+    setChecked(!checked);
+    if (!checked && userEmail.length > 3 && userPassword.length > 5) {
+      console.log('saved');
+
+      await saveToSecureStore('email', userEmail);
+      await saveToSecureStore('password', userPassword);
+      await saveToSecureStore('checked', '1');
+    }
+    if (checked) {
+      console.log('delete');
+      await deleteFromSecureStore('email');
+      await deleteFromSecureStore('password');
+      await deleteFromSecureStore('checked');
+    }
+  };
+
+  useEffect(() => {
+    const getStore = async () => {
+      try {
+        const secureStore = await store();
+        console.log(secureStore);
+        if (
+          secureStore.isChecked === '' ||
+          secureStore.storeEmail === '' ||
+          secureStore.storePassword === ''
+        ) {
+          return;
+        }
+
+        setChecked(true);
+        setUserEmail(secureStore.storeEmail);
+        setUserPassword(secureStore.storePassword);
+      } catch (error) {
+        return;
+      }
+    };
+    getStore();
+  }, []);
+
   useEffect(() => {
     console.log('authStatus', authStatus);
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        var uid = user.uid;
         const statusAutorized: TAuthorizedStatus = {
           currentAuthorizedStatus: 'Authorized',
         };
         dispatch(setAuthStatus(statusAutorized));
       } else {
-        // User is signed out
         Alert.alert('need autorized');
       }
     });
     return unsubscribe;
   }, []);
+
+  const singinHandler = () => {
+    signInWithEmailAndPassword(auth, userEmail, userPassword)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        if (user) {
+          const statusAutorized: TAuthorizedStatus = {
+            currentAuthorizedStatus: 'Authorized',
+          };
+          try {
+            getValueFromSecureStore('email').then((value) => {
+              console.log(value);
+            });
+          } catch {
+            console.log('nothing');
+          }
+          dispatch(setAuthStatus(statusAutorized));
+        }
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert(errorMessage);
+      });
+  };
+
   return (
     <ScrollView
       keyboardShouldPersistTaps="never"
@@ -85,6 +181,8 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
             mode="outlined"
             label="Email or phone number"
             placeholder="email@gmail.com"
+            value={userEmail}
+            onChangeText={(text) => setUserEmail(text)}
             right={
               <TextInput.Icon icon="account" iconColor={theme.colors.primary} />
             }
@@ -94,6 +192,8 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
             label="Password"
             secureTextEntry={isSecured}
             keyboardType="email-address"
+            value={userPassword}
+            onChangeText={(text) => setUserPassword(text)}
             right={
               <TextInput.Icon
                 icon={isSecured ? 'eye-off' : 'eye'}
@@ -112,9 +212,7 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
               uncheckedColor={theme.colors.secondary}
               label="Remember me"
               labelVariant="titleSmall"
-              onPress={() => {
-                setChecked(!checked);
-              }}
+              onPress={checkHandler}
             />
           </Pressable>
           <LabelBtn onPress={() => console.log('Press Forgot password')}>
@@ -128,7 +226,7 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
           label={LOGIN_BTN_LABEL}
           mode="contained"
           bordered
-          onPress={() => console.log('authStatus', authStatus)}
+          onPress={() => singinHandler()}
         />
         <View style={s(theme).btnsGroupe}>
           {SECONDARY_BTNS.map((btn, index) => (

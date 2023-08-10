@@ -1,11 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, Text, View, Keyboard, SafeAreaView } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  Keyboard,
+  SafeAreaView,
+  Alert,
+} from 'react-native';
 import { HelperText, TextInput } from 'react-native-paper';
-import { auth, register } from '../../../firebase';
+import { auth } from '../../../firebase';
 import LabelBtn from '../../components/shared/LabelBtn/LabelBtn';
 import { COMPLETE_BTN_LABEL } from '../../constants';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { IAuthScreenProps, TRegistration } from '../../interfaces';
+import { registerUser } from '../../services/firebase/authentication/authCtrl';
 
 import s from './Registration.styles';
 
@@ -49,7 +57,7 @@ const Registration = ({
   }, [value]);
 
   const registerHandler = (email: string, password: string) => {
-    register(email, password);
+    registerUser(email, password);
   };
 
   return (
@@ -109,10 +117,17 @@ const Registration = ({
           mode="contained"
           bordered
           label={COMPLETE_BTN_LABEL}
-          onPress={() => {
+          onPress={async () => {
             console.log('confirmPassword', isConfirmPassword);
             if (isConfirmPassword) {
               registerHandler(value.email, value.password);
+              await auth
+                .authStateReady()
+                .then(() => navigation.navigate('Login'))
+                .catch((error) => {
+                  const errorMessage = error.message;
+                  Alert.alert(errorMessage);
+                });
             }
           }}
         />
