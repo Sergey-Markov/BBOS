@@ -130,8 +130,6 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
           currentAuthorizedStatus: 'Authorized',
         };
         dispatch(setAuthStatus(statusAutorized));
-      } else {
-        Alert.alert('need autorized');
       }
     });
     return unsubscribe;
@@ -146,13 +144,6 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
           const statusAutorized: TAuthorizedStatus = {
             currentAuthorizedStatus: 'Authorized',
           };
-          try {
-            getValueFromSecureStore('email').then((value) => {
-              console.log(value);
-            });
-          } catch {
-            console.log('nothing');
-          }
           dispatch(setAuthStatus(statusAutorized));
         }
       })

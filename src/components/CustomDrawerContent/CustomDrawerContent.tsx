@@ -7,8 +7,14 @@ import { DrawerNavigationState, ParamListBase } from '@react-navigation/native';
 import { useState } from 'react';
 import { Image, Pressable, View } from 'react-native';
 import { Text } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { userDataMock } from '../../mocks/userDataMock';
+import {
+  setAuthStatus,
+  TAuthorizedStatus,
+} from '../../redux/reducers/authReducer';
+import { signOutHandler } from '../../services/firebase/userCtrls/userCtrl';
 
 import s from './CustomDrawerContent.styles';
 
@@ -44,12 +50,18 @@ const DRAWER_ITEMS = [
     label: 'QR Scanner',
     screen: 'Scanner',
   },
+  {
+    id: 5,
+    label: 'Log out',
+    screen: 'Login',
+  },
 ];
 
 const CustomDrawerContent = (props: ICustomDrawerContentProps) => {
   const { navigation } = props;
   const [userData, setUserData] = useState(userDataMock);
   const theme = useAppTheme();
+  const dispatch = useDispatch();
 
   return (
     <DrawerContentScrollView
@@ -73,7 +85,21 @@ const CustomDrawerContent = (props: ICustomDrawerContentProps) => {
         <DrawerItem
           key={item.id}
           label={item.label}
-          onPress={() => navigation.navigate(item.screen)}
+          onPress={async () => {
+            if (item.screen === 'Login') {
+              const toLoginPageHandler = () => {
+                navigation.navigate(item.screen);
+              };
+              const statusUnAutorized: TAuthorizedStatus = {
+                currentAuthorizedStatus: 'UnAuthorized',
+              };
+              await signOutHandler();
+              dispatch(setAuthStatus(statusUnAutorized));
+
+              return;
+            }
+            navigation.navigate(item.screen);
+          }}
         />
       ))}
     </DrawerContentScrollView>

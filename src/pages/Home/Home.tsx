@@ -16,6 +16,7 @@ import { COMMUNITY_EVENTS_STR, COMMUNITY_NEWS_STR } from '../../constants';
 
 import s from './Home.styles';
 import { getValueFromSecureStore } from '../Login/Login';
+import { auth } from '../../../firebase';
 
 const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
   const [isFormBtn, setFormBtn] = useState<boolean>(false);

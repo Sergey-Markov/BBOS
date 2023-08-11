@@ -1,6 +1,8 @@
-import { Auth, User } from 'firebase/auth';
+import { Auth, signOut, User } from 'firebase/auth';
 import { child, get, getDatabase, ref, set } from 'firebase/database';
+import { Alert } from 'react-native';
 import { auth, database } from '../../../../firebase';
+import { IAuthScreenProps, RootStackParamList } from '../../../interfaces';
 
 type TUpdateUserData = (
   user: User,
@@ -59,4 +61,11 @@ export const getUserById = (userId: string) => {
     .catch((error) => {
       console.error(error);
     });
+};
+export const signOutHandler = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    Alert.alert('You don`t log out, error is: ' + error);
+  }
 };
