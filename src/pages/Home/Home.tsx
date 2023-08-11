@@ -27,14 +27,6 @@ const Home = ({ navigation, route }: IScreenProps<'Home'>) => {
       if (!isFormBtn) {
         setFormBtn(true);
       }
-      (async () => {
-        try {
-          const value = await getValueFromSecureStore('email');
-          console.log('value', value);
-        } catch (error) {
-          console.log('error');
-        }
-      })();
       return () => setFormBtn(false);
     }, [])
   );

@@ -105,7 +105,6 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
     const getStore = async () => {
       try {
         const secureStore = await store();
-        console.log(secureStore);
         if (
           secureStore.isChecked === '' ||
           secureStore.storeEmail === '' ||
@@ -125,7 +124,6 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
   }, []);
 
   useEffect(() => {
-    console.log('authStatus', authStatus);
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         const statusAutorized: TAuthorizedStatus = {
@@ -144,7 +142,7 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        if (user) {
+        if (user && checked) {
           const statusAutorized: TAuthorizedStatus = {
             currentAuthorizedStatus: 'Authorized',
           };
