@@ -1,35 +1,35 @@
 import React, { useState, useCallback, useLayoutEffect } from 'react';
-import { useAppTheme } from '../../hooks/useAppTheme';
 import { IScreenProps } from '../../interfaces';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 
-import { onSnapshot } from 'firebase/firestore';
-import {
-  addDataToFirebase,
-  auth,
-  getChatsDataFromFirestore,
-} from '../../../firebase';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { addDataToFirebase, auth, dbFirestore } from '../../../firebase';
 import { KeyboardAvoidingView, Platform, View } from 'react-native';
 
 const Chat = ({ navigation, route }: IScreenProps<'Chat'>) => {
   const [messages, setMessages] = useState<IMessage[]>([]);
 
   useLayoutEffect(() => {
-    const querySnapshot = async () => {
-      const result = await getChatsDataFromFirestore();
-      onSnapshot(result, (snapshot) => {
-        setMessages(
-          snapshot.docs.map((item) => ({
-            _id: item.data()._id,
-            text: item.data().text,
-            createdAt: item.data().createdAt.toDate(),
-            user: item.data().user,
-          }))
-        );
-      });
+    const unsubscribe = () => {
+      const sectionsCollectionRef = collection(dbFirestore, 'chats');
+      const q = query(sectionsCollectionRef, orderBy('createdAt', 'desc'));
+      onSnapshot(
+        q,
+        (snapshot) => {
+          setMessages(
+            snapshot.docs.map((item) => ({
+              _id: item.data()._id,
+              text: item.data().text,
+              createdAt: item.data().createdAt.toDate(),
+              user: item.data().user,
+            }))
+          );
+        },
+        () => unsubscribe
+      );
     };
 
-    querySnapshot();
+    unsubscribe();
   }, []);
 
   const onSend = useCallback(async (messages: IMessage[] = []) => {

@@ -11,10 +11,7 @@ import {
   onSnapshot,
   QueryOrderByConstraint,
 } from 'firebase/firestore';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyCrFHeBpBYFcNUzmjzvQHdjoaGD_nWjfwQ',
   authDomain: 'os-community.firebaseapp.com',
@@ -27,7 +24,6 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 const database = getDatabase(app);
 const dbFirestore = getFirestore();
@@ -37,17 +33,4 @@ const addDataToFirebase = async (collectionName: string, data: any) => {
   await addDoc(collection(dbFirestore, collectionName), data);
 };
 
-const getChatsDataFromFirestore = async () => {
-  const sectionsCollectionRef = collection(dbFirestore, 'chats');
-  const q = query(sectionsCollectionRef, orderBy('createdAt', 'desc'));
-  return q;
-};
-
-export {
-  auth,
-  database,
-  baseUrl,
-  dbFirestore,
-  addDataToFirebase,
-  getChatsDataFromFirestore,
-};
+export { auth, database, baseUrl, dbFirestore, addDataToFirebase };
