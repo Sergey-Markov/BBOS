@@ -6,23 +6,40 @@ import TaxiServiceItem from '../../components/shared/TaxiServiceItem/TaxiService
 import { useAppTheme } from '../../hooks/useAppTheme';
 import CommonServicesItem from '../../components/shared/CommonServicesItem/CommonServicesItem';
 import JobsServiceCard from '../../components/shared/JobsServiceCard/JobsServiceCard';
-import { IScreenProps } from '../../interfaces';
+import { IScreenProps, JobsServiceCardType } from '../../interfaces';
 import { useFocusEffect } from '@react-navigation/native';
-import food from '../../mocks/foodServices.json';
-import taxi from '../../mocks/taxi.json';
-import common from '../../mocks/commonServices.json';
-import commercial from '../../mocks/commercial_services.json';
+import { useSelector } from 'react-redux';
+import { globalDataSelector } from '../../redux/reducers/globalDataReducer';
 
 import s from './Servicing.styles';
 
-const foodServices = food.data;
-const taxiServices = taxi.taxi_list_data;
-const commonServices = common.commonServices_data;
-const commercialServices = commercial.commercial_services_data;
+export type TTaxiItem = {
+  name: any;
+  id?: string | number | undefined;
+  tel?: string[];
+  url?: string;
+};
+export type TFoodServiceItem = {
+  name: any;
+  id?: string | number | undefined;
+  tel?: string[];
+  url?: string;
+  address?: string;
+};
+export type TCommonServicesItem = {
+  name: any;
+  id?: string | number | undefined;
+  tel?: string[];
+  address?: string;
+};
 
 const Servicing = ({ navigation, route }: IScreenProps<'Servicing'>) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const theme = useAppTheme();
+
+  const globalData = useSelector(globalDataSelector)[0];
+  const { foodServices, taxi, commonServices, commercial_services } =
+    globalData;
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(!isExpanded);
@@ -44,7 +61,7 @@ const Servicing = ({ navigation, route }: IScreenProps<'Servicing'>) => {
         title="Food order"
         left={(props) => <List.Icon {...props} icon="food-turkey" />}
       >
-        {foodServices.map((item) => {
+        {foodServices.map((item: TFoodServiceItem) => {
           return <FoodServiceItem key={item.name} item={item} />;
         })}
       </List.Accordion>
@@ -53,7 +70,7 @@ const Servicing = ({ navigation, route }: IScreenProps<'Servicing'>) => {
         title="Taxi"
         left={(props) => <List.Icon {...props} icon="taxi" />}
       >
-        {taxiServices.map((item) => {
+        {taxi.map((item: TTaxiItem) => {
           return <TaxiServiceItem key={item.name} item={item} />;
         })}
       </List.Accordion>
@@ -61,7 +78,7 @@ const Servicing = ({ navigation, route }: IScreenProps<'Servicing'>) => {
         title="Communal institutions"
         left={(props) => <List.Icon {...props} icon="office-building" />}
       >
-        {commonServices.map((item) => {
+        {commonServices.map((item: TCommonServicesItem) => {
           return <CommonServicesItem key={item.name} item={item} />;
         })}
       </List.Accordion>
@@ -72,9 +89,11 @@ const Servicing = ({ navigation, route }: IScreenProps<'Servicing'>) => {
         left={(props) => <List.Icon {...props} icon="human-dolly" />}
       >
         <View style={s(theme).commercialWrapper}>
-          {commercialServices.map((item, index) => {
-            return <JobsServiceCard key={index} service={item} />;
-          })}
+          {commercial_services.map(
+            (item: JobsServiceCardType, index: number) => {
+              return <JobsServiceCard key={index} service={item} />;
+            }
+          )}
         </View>
       </List.Accordion>
     </ScrollView>

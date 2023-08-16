@@ -4,6 +4,7 @@ import authReducer from './reducers/authReducer';
 import postsReducer from './reducers/postsReducers';
 import newsReducer from './reducers/newsReducer';
 import eventsReducer from './reducers/eventsReducer';
+import globalDataReducer from './reducers/globalDataReducer';
 
 const rootReducers = combineReducers({
   userReducer,
@@ -11,6 +12,7 @@ const rootReducers = combineReducers({
   postsReducer,
   newsReducer,
   eventsReducer,
+  globalDataReducer,
 });
 
 export default rootReducers;

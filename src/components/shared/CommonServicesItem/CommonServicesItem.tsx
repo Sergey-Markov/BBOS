@@ -6,26 +6,22 @@ import callPhoneHandler from '../../../utils/callPhoneHandler';
 import openGoogleMapHandler from '../../../utils/openGoogleMapHandler';
 
 import s from './CommonServicesItem.styles';
+import { TCommonServicesItem } from '../../../pages/Servicing/Servicing';
 
 interface ICommonServicesItemProps {
-  item: {
-    id?: number | string;
-    name: string;
-    tel: string[];
-    address: string;
-  };
+  item: TCommonServicesItem;
 }
 
 const BTNS_ARR = [
   {
     id: '1',
     iconName: 'phone',
-    onPress: (tel: string[] | string) => callPhoneHandler(tel as string[]),
+    onPress: (tel?: string[] | string) => callPhoneHandler(tel as string[]),
   },
   {
     id: '2',
     iconName: 'google-maps',
-    onPress: (address: string | string[]) =>
+    onPress: (address?: string | string[]) =>
       openGoogleMapHandler(address as string),
     iconColor: true,
   },

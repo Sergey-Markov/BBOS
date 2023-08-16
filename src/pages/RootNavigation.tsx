@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   LinkingOptions,
   NavigationContainer,
@@ -12,10 +12,11 @@ import { Text } from 'react-native-paper';
 import DrawerNavigator from './DrawerNavigator';
 import AuthNavigator from './AuthNavigator';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../redux/reducers/usersReducer';
-import { authSelector } from '../redux/reducers/authReducer';
+
 import { getAuthStatus } from '../redux/selectors/authSelectors/authSelectors';
 import React from 'react';
+import { globalDataSelector } from '../redux/reducers/globalDataReducer';
+import Spiner from '../components/shared/Spiner/Spiner';
 
 const prefix = Linking.createURL('/');
 
@@ -39,6 +40,7 @@ function getHeaderTitle(route: string) {
 
 const RootNavigation = () => {
   const authStatus = useSelector(getAuthStatus);
+  const globalData = useSelector(globalDataSelector);
 
   const linking = {
     prefixes: [prefix],
@@ -60,18 +62,21 @@ const RootNavigation = () => {
       },
     },
   };
+  const isFullData = Object.keys(globalData[0]).length > 0;
+  const curComponent = Boolean(isFullData) ? (
+    <DrawerNavigator getHeaderTitle={getHeaderTitle} />
+  ) : (
+    <Spiner />
+  );
 
   return (
     <NavigationContainer
       linking={linking as LinkingOptions<ParamListBase>}
       fallback={<Text>Loading...</Text>}
     >
-      {authStatus === 'Authorized' ? (
-        <DrawerNavigator getHeaderTitle={getHeaderTitle} />
-      ) : (
-        <AuthNavigator />
-      )}
+      {authStatus === 'Authorized' ? curComponent : <AuthNavigator />}
     </NavigationContainer>
   );
 };
+
 export default RootNavigation;

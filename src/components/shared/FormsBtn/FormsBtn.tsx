@@ -4,7 +4,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { FAB, Portal } from 'react-native-paper';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import { RootStackParamList } from '../../../interfaces';
-import COMMUNITY from '../../../mocks/community_data.json';
 import callPhoneHandler from '../../../utils/callPhoneHandler';
 import {
   FORMS_BTN_EVENT_LABEL,
@@ -15,12 +14,15 @@ import {
   FORMS_SCREEN_POST_TITLE,
   OPEN_GATE_BTN_LABEL,
 } from '../../../constants';
+import { useSelector } from 'react-redux';
+import { globalDataSelector } from '../../../redux/reducers/globalDataReducer';
 
 import s from './FormsBtn.styles';
 
-const { gatePhoneNumber } = COMMUNITY.data;
-
 const FormsBtn = () => {
+  const globalData = useSelector(globalDataSelector);
+  const gatePhoneNumber = globalData[0].community_data.gatePhoneNumber;
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const theme = useAppTheme();
   const navigation =
@@ -29,7 +31,6 @@ const FormsBtn = () => {
   const toggleHandler = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
-
   const btnOptions = useMemo(() => {
     return [
       {

@@ -6,26 +6,22 @@ import callPhoneHandler from '../../../utils/callPhoneHandler';
 import goToUrl from '../../../utils/goToUrl';
 
 import s from './TaxiServiceItem.styles';
+import { TTaxiItem } from '../../../pages/Servicing/Servicing';
 
 interface ITaxiServiceItemProps {
-  item: {
-    id?: number | string;
-    name: string;
-    tel: string[];
-    url: string;
-  };
+  item: TTaxiItem;
 }
 
 const BTNS_ARR = [
   {
     id: '1',
     iconName: 'phone',
-    onPress: (tel: string[] | string) => callPhoneHandler(tel as string[]),
+    onPress: (tel?: string[] | string) => callPhoneHandler(tel as string[]),
   },
   {
     id: '2',
     iconName: 'web',
-    onPress: (url: string[] | string) => goToUrl(url as string),
+    onPress: (url?: string[] | string) => goToUrl(url as string),
   },
 ];
 

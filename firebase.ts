@@ -11,6 +11,7 @@ import {
   onSnapshot,
   QueryOrderByConstraint,
 } from 'firebase/firestore';
+import { ref, onValue } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCrFHeBpBYFcNUzmjzvQHdjoaGD_nWjfwQ',
@@ -27,10 +28,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 const dbFirestore = getFirestore();
-const baseUrl = database.app.options.databaseURL;
 
 const addDataToFirebase = async (collectionName: string, data: any) => {
   await addDoc(collection(dbFirestore, collectionName), data);
 };
 
-export { auth, database, baseUrl, dbFirestore, addDataToFirebase };
+export { auth, database, dbFirestore, addDataToFirebase };

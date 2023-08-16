@@ -13,7 +13,7 @@ import { TextInput, Checkbox } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { auth } from '../../../firebase';
+import { auth, database } from '../../../firebase';
 import LabelBtn from '../../components/shared/LabelBtn/LabelBtn';
 import {
   FORGOT_PASSWORD_LINK_LABEL,
@@ -23,12 +23,13 @@ import {
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { IAuthScreenProps } from '../../interfaces';
 import {
-  authSelector,
   setAuthStatus,
   TAuthorizedStatus,
 } from '../../redux/reducers/authReducer';
 
 import s from './Login.styles';
+import { onValue, ref } from 'firebase/database';
+import { setGlobalData } from '../../redux/reducers/globalDataReducer';
 
 const store = async () => {
   const isChecked = await getValueFromSecureStore('checked');
@@ -78,7 +79,6 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
   const [isSecured, setIsSecured] = useState(true);
   const theme = useAppTheme();
   const dispatch = useDispatch();
-  const authStatus = useSelector(authSelector);
 
   const togglePasswordVisibility = () => {
     setIsSecured(!isSecured);
@@ -129,6 +129,15 @@ const Login = ({ navigation, route }: IAuthScreenProps<'Login'>) => {
         const statusAutorized: TAuthorizedStatus = {
           currentAuthorizedStatus: 'Authorized',
         };
+        onValue(
+          ref(database, 'global'),
+          (snapshot) => {
+            dispatch(setGlobalData(snapshot.val()));
+          },
+          {
+            onlyOnce: true,
+          }
+        );
         dispatch(setAuthStatus(statusAutorized));
       }
     });

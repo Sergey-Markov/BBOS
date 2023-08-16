@@ -7,32 +7,27 @@ import goToUrl from '../../../utils/goToUrl';
 import openGoogleMapHandler from '../../../utils/openGoogleMapHandler';
 
 import s from './FoodServiceItem.styles';
+import { TFoodServiceItem } from '../../../pages/Servicing/Servicing';
 
 interface IFoodServiceItemProps {
-  item: {
-    id?: number | string;
-    name: string;
-    tel: string[];
-    url: string;
-    address: string;
-  };
+  item: TFoodServiceItem;
 }
 
 const BTNS_ARR = [
   {
     id: '1',
     iconName: 'phone',
-    onPress: (tel: string[] | string) => callPhoneHandler(tel as string[]),
+    onPress: (tel?: string[] | string) => callPhoneHandler(tel as string[]),
   },
   {
     id: '2',
     iconName: 'web',
-    onPress: (url: string[] | string) => goToUrl(url as string),
+    onPress: (url?: string[] | string) => goToUrl(url as string),
   },
   {
     id: '3',
     iconName: 'google-maps',
-    onPress: (address: string[] | string) =>
+    onPress: (address?: string[] | string) =>
       openGoogleMapHandler(address as string),
   },
 ];
