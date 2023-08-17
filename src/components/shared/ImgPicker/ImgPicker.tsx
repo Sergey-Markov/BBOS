@@ -20,7 +20,8 @@ const ImgPicker = ({ data, onChange, onReset, multiple = false }: any) => {
 
   const pickImage = useCallback(async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      base64: true,
       allowsEditing: !multiple,
       aspect: [4, 3],
       quality: 1,

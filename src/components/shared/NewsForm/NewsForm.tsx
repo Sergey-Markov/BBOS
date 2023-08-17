@@ -18,6 +18,11 @@ import s from './NewsForm.styles';
 import { useDispatch } from 'react-redux';
 import { addNews } from '../../../redux/reducers/newsReducer';
 import { useNavigation } from '@react-navigation/native';
+import {
+  addDataToFirebase,
+  auth,
+  uploadImgToStorage,
+} from '../../../../firebase';
 
 const INPUTS_ARR = [
   {
@@ -56,6 +61,7 @@ interface INewsForm {
 
 const NewsForm = ({ scrollRef }: INewsForm) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [imgUrlFromStorage, setImgUrlFromStorage] = useState<string>('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const modalToggler = useCallback(() => {
@@ -67,7 +73,7 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
     <SafeAreaView style={s.container}>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           if (
             values.urlToImage === null ||
             values.title.length <= 0 ||
@@ -77,14 +83,36 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
             return;
           }
           if (values.urlToImage.assets) {
+            await uploadImgToStorage(
+              values.urlToImage.assets[0].base64,
+              setImgUrlFromStorage
+            );
+            // console.log(imgUrlFromStorage);
             const imgString = values.urlToImage.assets[0].uri;
+            const imgUriArr = imgString.split('/');
+            const imgName = imgUriArr[imgUriArr.length - 1];
             const newNewsPost = {
-              ...values,
+              // ...values,
+              title: values.title,
+              description: values.description,
+              link: values.link,
               publishedAt: Number(strDate),
-              urlToImage: imgString,
+              // urlToImage: values.urlToImage,
+              img: {
+                uri: imgString,
+                name: imgName,
+                storageLink: imgUrlFromStorage,
+              },
               id: (Math.random() * 1000).toFixed(0).toString(),
+              user: {
+                id: auth.currentUser?.uid,
+                name: auth.currentUser?.displayName,
+              },
             };
-            dispatch(addNews(newNewsPost));
+            console.log(newNewsPost);
+            await addDataToFirebase('communityNews', newNewsPost);
+
+            // dispatch(addNews(newNewsPost));
             navigation.goBack();
           }
         }}
