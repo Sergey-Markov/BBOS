@@ -23,6 +23,7 @@ import {
   auth,
   uploadImgToStorage,
 } from '../../../../firebase';
+import { getDownloadURL } from 'firebase/storage';
 
 const INPUTS_ARR = [
   {
@@ -83,14 +84,16 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
             return;
           }
           if (values.urlToImage.assets) {
-            await uploadImgToStorage(
-              values.urlToImage.assets[0].base64,
-              setImgUrlFromStorage
-            );
-            // console.log(imgUrlFromStorage);
             const imgString = values.urlToImage.assets[0].uri;
             const imgUriArr = imgString.split('/');
             const imgName = imgUriArr[imgUriArr.length - 1];
+            await uploadImgToStorage(
+              values.urlToImage.assets[0].base64,
+              imgName
+            );
+
+            // console.log(imgUrlFromStorage);
+
             const newNewsPost = {
               // ...values,
               title: values.title,
@@ -101,7 +104,7 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
               img: {
                 uri: imgString,
                 name: imgName,
-                storageLink: imgUrlFromStorage,
+                // storageLink: imgUrlFromStorage,
               },
               id: (Math.random() * 1000).toFixed(0).toString(),
               user: {

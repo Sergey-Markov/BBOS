@@ -29,7 +29,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-const database = getDatabase(app);
+const database = getDatabase();
 const dbFirestore = getFirestore();
 const storage = getStorage();
 
@@ -39,33 +39,40 @@ const addDataToFirebase = async (collectionName: string, data: any) => {
 
 // ============
 
-const storageRef = ref(storage, 'images');
+const uploadImgToStorage = async (img: any, name: string) => {
+  const storageRef = ref(storage, `images/${name}`);
+  uploadString(storageRef, img, 'base64');
+  // getDownloadURL(storageRef).then((value) => console.log('rs', value));
+  // await uploadResult.then(
+  //   (snapshot) => {
+  //     getDownloadURL(snapshot.ref).then((downloadURL) => {
+  //       console.log('File available at', downloadURL);
+  //       setter(downloadURL);
+  //     });
+  //   },
+  //   (error) => {
+  //     console.log(error);
 
-const uploadImgToStorage = async (img: any, setter: any) => {
-  const uploadResult = uploadString(storageRef, img, 'base64');
-  await uploadResult.then(
-    (snapshot) => {
-      getDownloadURL(snapshot.ref).then((downloadURL) => {
-        console.log('File available at', downloadURL);
-        setter(downloadURL);
-      });
-    },
-    (error) => {
-      console.log(error);
-
-      // switch (error.code) {
-      //   case 'storage/unauthorized':
-      //     console.log('user is unauthorized');
-      //     break;
-      //   case 'storage/canceled':
-      //     console.log('User canceled the upload');
-      //     break;
-      //   case 'storage/unknown':
-      //     console.log('Unknown error occurred, inspect error.serverResponse');
-      //     break;
-      // }
-    }
-  );
+  //     // switch (error.code) {
+  //     //   case 'storage/unauthorized':
+  //     //     console.log('user is unauthorized');
+  //     //     break;
+  //     //   case 'storage/canceled':
+  //     //     console.log('User canceled the upload');
+  //     //     break;
+  //     //   case 'storage/unknown':
+  //     //     console.log('Unknown error occurred, inspect error.serverResponse');
+  //     //     break;
+  //     // }
+  //   }
+  // );
 };
 
-export { auth, database, dbFirestore, addDataToFirebase, uploadImgToStorage };
+export {
+  auth,
+  database,
+  dbFirestore,
+  addDataToFirebase,
+  uploadImgToStorage,
+  storage,
+};
