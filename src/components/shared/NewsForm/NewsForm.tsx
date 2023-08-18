@@ -13,17 +13,10 @@ import {
 } from '../../../constants';
 import LabelBtn from '../LabelBtn/LabelBtn';
 import InputCustom from '../InputCustom/InputCustom';
+import { useNavigation } from '@react-navigation/native';
+import { auth, uploadImgToStorage } from '../../../../firebase';
 
 import s from './NewsForm.styles';
-import { useDispatch } from 'react-redux';
-import { addNews } from '../../../redux/reducers/newsReducer';
-import { useNavigation } from '@react-navigation/native';
-import {
-  addDataToFirebase,
-  auth,
-  uploadImgToStorage,
-} from '../../../../firebase';
-import { getDownloadURL } from 'firebase/storage';
 
 const INPUTS_ARR = [
   {
@@ -62,8 +55,6 @@ interface INewsForm {
 
 const NewsForm = ({ scrollRef }: INewsForm) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [imgUrlFromStorage, setImgUrlFromStorage] = useState<string>('');
-  const dispatch = useDispatch();
   const navigation = useNavigation();
   const modalToggler = useCallback(() => {
     setIsModalVisible((prev) => !prev);
@@ -87,24 +78,18 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
             const imgString = values.urlToImage.assets[0].uri;
             const imgUriArr = imgString.split('/');
             const imgName = imgUriArr[imgUriArr.length - 1];
-            await uploadImgToStorage(
-              values.urlToImage.assets[0].base64,
-              imgName
-            );
-
-            // console.log(imgUrlFromStorage);
+            const imgNameArr = imgName.split('.');
+            const imgType = imgNameArr[imgNameArr.length - 1];
 
             const newNewsPost = {
-              // ...values,
               title: values.title,
               description: values.description,
               link: values.link,
               publishedAt: Number(strDate),
-              // urlToImage: values.urlToImage,
               img: {
                 uri: imgString,
                 name: imgName,
-                // storageLink: imgUrlFromStorage,
+                storageLink: '',
               },
               id: (Math.random() * 1000).toFixed(0).toString(),
               user: {
@@ -112,11 +97,18 @@ const NewsForm = ({ scrollRef }: INewsForm) => {
                 name: auth.currentUser?.displayName,
               },
             };
-            console.log(newNewsPost);
-            await addDataToFirebase('communityNews', newNewsPost);
 
-            // dispatch(addNews(newNewsPost));
-            navigation.goBack();
+            const goBack = useCallback(() => {
+              navigation.goBack();
+            }, []);
+
+            await uploadImgToStorage(
+              values.urlToImage.assets[0],
+              imgName,
+              imgType,
+              newNewsPost,
+              goBack
+            );
           }
         }}
       >
